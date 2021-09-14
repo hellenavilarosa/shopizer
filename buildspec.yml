@@ -1,0 +1,39 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      docker: 19
+  pre_build:
+    commands:
+      - aws codeguru-reviewer create-code-review --name shopizer-$CODEBUILD_RESOLVED_SOURCE_VERSION --repository-association-arn arn:aws:codeguru-reviewer:us-west-2:545553504856:association:315ea8e8-3d66-46fa-85cd-cea7f59c5f53 --type '{"RepositoryAnalysis":{"RepositoryHead":{"BranchName":"master"}}}'
+      - aws codeguru-reviewer list-code-reviews  --type RepositoryAnalysis --repository-names shopizer --state Pending > test.json
+      - ARN=$(jq '.CodeReviewSummaries[0].CodeReviewArn' test.json | tr -d \")
+      - echo ${ARN}
+      - aws codeguru-reviewer wait code-review-completed --code-review-arn $ARN
+      - aws codeguru-reviewer list-recommendations --code-review-arn $ARN
+      - echo Logging in to Amazon ECR...
+      - AccountID=$(aws sts get-caller-identity --query Account --output text)
+      - CommitID="$(echo $GitCommitID | head -c 8)"
+      - $(aws ecr get-login --registry-ids $AccountID --no-include-email --region ${AWS_DEFAULT_REGION})
+      - REPOSITORY_URI=545553504856.dkr.ecr.us-west-2.amazonaws.com/shopizer
+      - CommitID=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - echo ${CommitID}
+      - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build -t ${REPOSITORY_URI}:${CommitID} .
+      - docker tag ${REPOSITORY_URI}:${CommitID} ${REPOSITORY_URI}:latest
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker images...
+      - docker push ${REPOSITORY_URI}:${CommitID}
+      - docker push ${REPOSITORY_URI}:latest
+      - printf '[{"name":"python-example","imageUri":"545553504856.dkr.ecr.us-west-2.amazonaws.com/shopizer:latest"}]' > imagedefinitions.json
+      - cat imagedefinitions.json
+artifacts:
+    files:
+      - imagedefinitions.json
