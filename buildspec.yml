@@ -10,7 +10,8 @@ phases:
       - aws codeguru-reviewer list-code-reviews  --type RepositoryAnalysis --repository-names shopizer --state Pending > test.json
       - ARN=$(jq '.CodeReviewSummaries[0].CodeReviewArn' test.json | tr -d \")
       - echo ${ARN}
-      #- aws codeguru-reviewer wait code-review-completed --code-review-arn $ARN 
+      - mvnw clean install
+      #- aws codeguru-reviewer wait code-review-completed --code-review-arn $ARN
       - aws codeguru-reviewer list-recommendations --code-review-arn $ARN
       - echo Logging in to Amazon ECR...
       - AccountID=$(aws sts get-caller-identity --query Account --output text)
