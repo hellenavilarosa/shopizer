@@ -10,7 +10,10 @@ phases:
       - aws codeguru-reviewer list-code-reviews  --type RepositoryAnalysis --repository-names shopizer --state Pending > test.json
       - ARN=$(jq '.CodeReviewSummaries[0].CodeReviewArn' test.json | tr -d \")
       - echo ${ARN}
-      - sudo apt install maven
+      - sudo wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
+      - sudo sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
+      - sudo yum install -y apache-maven
+      - mvn --version
       - mvnw clean install
       #- aws codeguru-reviewer wait code-review-completed --code-review-arn $ARN
       - aws codeguru-reviewer list-recommendations --code-review-arn $ARN
