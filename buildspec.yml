@@ -10,6 +10,7 @@ phases:
       - aws codeguru-reviewer list-code-reviews  --type RepositoryAnalysis --repository-names shopizer --state Pending > test.json
       - ARN=$(jq '.CodeReviewSummaries[0].CodeReviewArn' test.json | tr -d \")
       - echo ${ARN}
+      - sudo apt install maven
       - mvnw clean install
       #- aws codeguru-reviewer wait code-review-completed --code-review-arn $ARN
       - aws codeguru-reviewer list-recommendations --code-review-arn $ARN
