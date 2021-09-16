@@ -38,7 +38,7 @@ phases:
       - echo Pushing the Docker images...
       - docker push ${REPOSITORY_URI}:${CommitID}
       - docker push ${REPOSITORY_URI}:latest
-      - printf '[{"name":"python-example","imageUri":"545553504856.dkr.ecr.us-west-2.amazonaws.com/shopizer:latest"}]' > imagedefinitions.json
+      - printf '[{"name":"shopizer","imageUri":"545553504856.dkr.ecr.us-west-2.amazonaws.com/shopizer:latest"}]' > imagedefinitions.json
       - cat imagedefinitions.json
 artifacts:
     files:
