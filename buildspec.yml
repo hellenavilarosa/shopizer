@@ -14,7 +14,7 @@ phases:
       - sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
       - yum install -y apache-maven
       - mvn --version
-      - mvnw clean install
+      - mvn clean install
       #-  aws codeguru-reviewer wait code-review-completed --code-review-arn $ARN
       - aws codeguru-reviewer list-recommendations --code-review-arn $ARN
       - echo Logging in to Amazon ECR...
