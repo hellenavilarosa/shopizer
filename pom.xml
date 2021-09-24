@@ -229,12 +229,12 @@
 			</dependency>
 
 			<!-- For connecting to oracle -->
-			<!-- <dependency> <groupId>com.oracle.database.jdbc</groupId> <artifactId>ojdbc8</artifactId> 
+			<!-- <dependency> <groupId>com.oracle.database.jdbc</groupId> <artifactId>ojdbc8</artifactId>
 				<version>${oracle.version}</version> </dependency> -->
 
 
 			<!-- For connecting to postgresql -->
-			<!-- <dependency> <groupId>org.postgresql</groupId> <artifactId>postgresql</artifactId> 
+			<!-- <dependency> <groupId>org.postgresql</groupId> <artifactId>postgresql</artifactId>
 				<version>${postgresql.version}</version> <scope>runtime</scope> </dependency> -->
 
 
@@ -425,7 +425,17 @@
 
 	<!--general dependencies -->
 	<dependencies>
-
+		<!--codeguru e x-ray-->
+		<dependency>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>codeguru-profiler-java-agent</artifactId>
+      <version>1.2.1</version>
+    </dependency>
+		<dependency>
+		  <groupId>com.amazonaws</groupId>
+		  <artifactId>aws-xray-recorder-sdk-core</artifactId>
+		  <version>1.2.1</version>
+		</dependency>
 		<!-- sm-search -->
 		<dependency>
 			<groupId>com.shopizer</groupId>
@@ -509,11 +519,11 @@
 		</dependency>
 
 		<!-- oracle -->
-		<!-- <dependency> <groupId>com.oracle</groupId> <artifactId>ojdbc8</artifactId> 
+		<!-- <dependency> <groupId>com.oracle</groupId> <artifactId>ojdbc8</artifactId>
 			<version>${oracle.version}</version> </dependency> -->
 
 
-		<!-- postgres <dependency> <groupId>org.postgresql</groupId> <artifactId>postgresql</artifactId> 
+		<!-- postgres <dependency> <groupId>org.postgresql</groupId> <artifactId>postgresql</artifactId>
 			</dependency> -->
 
 
@@ -544,6 +554,12 @@
 			<id>org.jboss.repository.releases</id>
 			<name>JBoss Maven Release Repository</name>
 			<url>https://repository.jboss.org/nexus/content/repositories/releases</url>
+		</repository>
+		<!--codeguru -->
+		<repository>
+			<id>codeguru-profiler</id>
+			<name>codeguru-profiler</name>
+			<url>https://d1osg35nybn3tt.cloudfront.net</url>
 		</repository>
 	</repositories>
 
@@ -619,11 +635,11 @@
 			</plugin>
 			<!--OSSRH -->
 
-			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-javadoc-plugin</artifactId> 
-				<executions> <execution> <id>attach-javadocs</id> <goals> <goal>jar</goal> 
-				</goals> </execution> </executions> </plugin> <plugin> <groupId>org.apache.maven.plugins</groupId> 
-				<artifactId>maven-gpg-plugin</artifactId> <version>1.5</version> <executions> 
-				<execution> <id>sign-artifacts</id> <phase>verify</phase> <goals> <goal>sign</goal> 
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-javadoc-plugin</artifactId>
+				<executions> <execution> <id>attach-javadocs</id> <goals> <goal>jar</goal>
+				</goals> </execution> </executions> </plugin> <plugin> <groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId> <version>1.5</version> <executions>
+				<execution> <id>sign-artifacts</id> <phase>verify</phase> <goals> <goal>sign</goal>
 				</goals> </execution> </executions> </plugin> -->
 
 		</plugins>

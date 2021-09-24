@@ -65,7 +65,6 @@ public class ShoppingCartCalculationServiceImpl implements ShoppingCartCalculati
 	@Override
 	public OrderTotalSummary calculate(final ShoppingCart cartModel, final Customer customer, final MerchantStore store,
 			final Language language) throws ServiceException {
-
 		Validate.notNull(cartModel, "cart cannot be null");
 		Validate.notNull(cartModel.getLineItems(), "Cart should have line items.");
 		Validate.notNull(store, "MerchantStore cannot be null");

@@ -67,7 +67,6 @@ public class ShoppingCartAPIIntegrationTest extends ServicesTestSupport {
         assertNotNull(response);
         assertThat(response.getStatusCode(), is(CREATED));
         assertEquals(response.getBody().getQuantity(), 1);
-
     }
 
     /**

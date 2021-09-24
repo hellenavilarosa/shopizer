@@ -10,6 +10,7 @@ import software.amazon.codeguruprofilerjavaagent.Profiler;
 
 
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
+
 public class ShopApplication extends SpringBootServletInitializer {
 
     @Override
@@ -24,8 +25,8 @@ public class ShopApplication extends SpringBootServletInitializer {
 	            .build()
 	            .start();
         SpringApplication.run(ShopApplication.class, args);
+
+
     }
-
-
 
 }
