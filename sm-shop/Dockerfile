@@ -12,7 +12,7 @@ RUN mkdir -p /usr/local/tomcat/files
 COPY --from=0 /usr/src/project/ROOT.war /usr/local/tomcat/webapps/ROOT.war
 COPY --from=0 /usr/src/project/SALESMANAGER.h2.db /usr/local/tomcat/
 COPY --from=0 /usr/src/project/files/ /usr/local/tomcat/files/
-RUN mvnw spring-boot:run
+RUN mvn spring-boot:run
 
 ENV JAVA_OPTS="-Xmx1024m"
 
