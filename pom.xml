@@ -431,11 +431,6 @@
       <artifactId>codeguru-profiler-java-agent</artifactId>
       <version>1.2.1</version>
     </dependency>
-		<dependency>
-		  <groupId>com.amazonaws</groupId>
-		  <artifactId>aws-xray-recorder-sdk-core</artifactId>
-		  <version>1.2.1</version>
-		</dependency>
 		<!-- sm-search -->
 		<dependency>
 			<groupId>com.shopizer</groupId>
