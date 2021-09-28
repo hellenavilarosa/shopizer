@@ -5,7 +5,6 @@ COPY ./files/ /usr/src/project/files/
 COPY ./codeguru-profiler-java-agent-standalone-1.2.1.jar /usr/src/project/
 WORKDIR /usr/src/project
 
-
 FROM tomcat:9.0.10-jre8
 
 RUN rm -rf /usr/local/tomcat/webapps/*
