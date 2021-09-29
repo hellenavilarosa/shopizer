@@ -89,7 +89,7 @@ public class ShoppingCartServiceImpl extends SalesManagerEntityServiceImpl<Long,
 
 		try {
 
-	    // //hellen
+	    // hellen
 	    Map map = System.getProperties();
 	    map.put(new BadKey("key"), "value"); // Memory leak even if your threads die.
 
