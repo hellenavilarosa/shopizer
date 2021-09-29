@@ -1,4 +1,4 @@
-FROM public.ecr.aws/amazoncorretto/amazoncorretto:latest
+FROM openjdk:8
 COPY ./target/ROOT.war /usr/src/project/
 ADD ./SALESMANAGER.h2.db /usr/src/project/
 COPY ./files/ /usr/src/project/files/

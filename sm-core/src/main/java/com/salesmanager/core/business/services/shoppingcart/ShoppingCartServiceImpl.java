@@ -35,18 +35,18 @@ import java.util.stream.Collectors;
 import java.util.Map;
 
 // //hellen
-// class BadKey {
-//     // no hashCode or equals();
-//     public final String key;
-//     public BadKey(String key) { this.key = key; }
-// }
-// class EntryHolder {
-//     Map.Entry<String, Integer> entry;
-//
-//     EntryHolder(Map.Entry<String, Integer> entry) {
-//         this.entry = entry;
-//     }
-// }
+class BadKey {
+    // no hashCode or equals();
+    public final String key;
+    public BadKey(String key) { this.key = key; }
+}
+class EntryHolder {
+    Map.Entry<String, Integer> entry;
+
+    EntryHolder(Map.Entry<String, Integer> entry) {
+        this.entry = entry;
+    }
+}
 //hellen
 @Service("shoppingCartService")
 public class ShoppingCartServiceImpl extends SalesManagerEntityServiceImpl<Long, ShoppingCart>
@@ -89,17 +89,17 @@ public class ShoppingCartServiceImpl extends SalesManagerEntityServiceImpl<Long,
 		try {
 
 	    // //hellen
-	    // Map map = System.getProperties();
-	    // map.put(new BadKey("key"), "value"); // Memory leak even if your threads die.
-      //
-	    // Thread.sleep(10000);
-	    // synchronized(map) {
-	    //     if(!map.containsKey("foo"))
-	    //         map.put("foo", "bar");
-	    // }
-      //
-	    // List<String> l = Collections.synchronizedList(new ArrayList<String>());
-	    //  String[] s = l.toArray(new String[l.size()]);
+	    Map map = System.getProperties();
+	    map.put(new BadKey("key"), "value"); // Memory leak even if your threads die.
+
+	    Thread.sleep(10000);
+	    synchronized(map) {
+	        if(!map.containsKey("foo"))
+	            map.put("foo", "bar");
+	    }
+
+	    List<String> l = Collections.synchronizedList(new ArrayList<String>());
+	     String[] s = l.toArray(new String[l.size()]);
 	    // //hellen
 
 			List<ShoppingCart> shoppingCarts = shoppingCartRepository.findByCustomer(customer.getId());
