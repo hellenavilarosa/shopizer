@@ -19,6 +19,7 @@ phases:
       #-  aws codeguru-reviewer wait code-review-completed --code-review-arn $ARN
       - recomendation_num=$(echo $(aws codeguru-reviewer list-recommendations --code-review-arn $ARN) | jq -r '.RecommendationSummaries | length')
       - echo ${recomendation_num}
+      - aws sns publish --topic-arn "arn:aws:sns:us-west-2:545553504856:codestar-notifications-shopizer" --message "Hello world!"
       - echo Logging in to Amazon ECR...
       - AccountID=$(aws sts get-caller-identity --query Account --output text)
       - CommitID="$(echo $GitCommitID | head -c 8)"
