@@ -15,11 +15,11 @@ phases:
       - yum install -y apache-maven
       - yum install jq -y
       - mvn --version
-      #- mvn clean install 
+      #- mvn clean install
       #-  aws codeguru-reviewer wait code-review-completed --code-review-arn $ARN
       - recomendation_num=$(echo $(aws codeguru-reviewer list-recommendations --code-review-arn $ARN) | jq -r '.RecommendationSummaries | length')
       - echo ${recomendation_num}
-      - aws sns publish --target-arn "arn:aws:sns:us-west-2:545553504856:codestar-notifications-shopizer" --message "Hello world!"
+      - aws sns publish --target-arn "arn:aws:sns:us-west-2:545553504856:codestar-notifications-shopizer" --message-structure json --message '{\"http\":\"This is the default Message\"}'
       - echo Logging in to Amazon ECR...
       - AccountID=$(aws sts get-caller-identity --query Account --output text)
       - CommitID="$(echo $GitCommitID | head -c 8)"
