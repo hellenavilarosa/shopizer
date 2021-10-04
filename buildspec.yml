@@ -19,7 +19,7 @@ phases:
       #-  aws codeguru-reviewer wait code-review-completed --code-review-arn $ARN
       - recomendation_num=$(echo $(aws codeguru-reviewer list-recommendations --code-review-arn $ARN) | jq -r '.RecommendationSummaries | length')
       - echo ${recomendation_num}
-      - aws sns publish --topic-arn "arn:aws:sns:us-west-2:545553504856:AnyCompany-topic" --message-structure json --message {"default":"A message.","email":"A message for email.","email-json":"A message for email (JSON).","http":"A message for HTTP.","https":"A message for HTTPS.","sqs":"A message for Amazon SQS."}'
+      - aws sns publish --topic-arn "arn:aws:sns:us-west-2:545553504856:AnyCompany-topic" --message-structure json --message '{"default":"A message.","email":"A message for email.","email-json":"A message for email (JSON).","http":"A message for HTTP.","https":"A message for HTTPS.","sqs":"A message for Amazon SQS."}'
       - echo Logging in to Amazon ECR...
       - AccountID=$(aws sts get-caller-identity --query Account --output text)
       - CommitID="$(echo $GitCommitID | head -c 8)"
