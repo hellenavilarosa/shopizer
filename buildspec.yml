@@ -8,7 +8,7 @@ phases:
     commands:
       - echo $Execution_ID
       - echo $CODEBUILD_BUILD_ID
-      - curl -H "Content-type:application/json" --data '{"channel":"C123456","blocks":[{"type":"section","text":{"type":"mrkdwn","text":"Hi I am a bot that can post *_fancy_* messages to any public channel."}}]}' -H "Authorization:${slack_token}" -X POST https://hooks.slack.com/services/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
+      - curl -H "Content-type:application/json" --data '{"channel":"C123456","blocks":[{"type":"section","text":{"type":"mrkdwn","text":"Hi I am a bot that can post *_fancy_* messages to any public channel."}}]}' -H "Authorization:${slack_token}" -X POST ${slack_webhook}
       #- aws codepipeline put-job-failure-result --job-id ${Execution_ID} --failure-details '{"type":"JobFailed","message":"Deu merda"}'
       - aws codeguru-reviewer create-code-review --name shopizer-$CODEBUILD_RESOLVED_SOURCE_VERSION --repository-association-arn arn:aws:codeguru-reviewer:us-west-2:545553504856:association:315ea8e8-3d66-46fa-85cd-cea7f59c5f53 --type '{"RepositoryAnalysis":{"RepositoryHead":{"BranchName":"master"}}}'
       - aws codeguru-reviewer list-code-reviews  --type RepositoryAnalysis --repository-names shopizer --state Pending > test.json
