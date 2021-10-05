@@ -22,6 +22,7 @@ phases:
       - |
         aws sns publish --topic-arn "arn:aws:sns:us-west-2:545553504856:AnyCompany-topic" --message-structure json --message '
         {
+          "default": "A message.",
           "email-json": {
             "message": {
                 "account": "545553504856",
