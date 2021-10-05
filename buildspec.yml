@@ -8,7 +8,7 @@ phases:
     commands:
       - echo $Execution_ID
       - echo $CODEBUILD_BUILD_ID
-      - aws codepipeline put-job-failure-result --job-id $Execution_ID --failure-details '{"type":"JobFailed","message":"Deu merda","externalExecutionId":"$CODEBUILD_BUILD_ID"}'
+      - aws codepipeline put-job-failure-result --job-id $Execution_ID --failure-details '{"type":"JobFailed","message":"Deu merda"}'
       - aws codeguru-reviewer create-code-review --name shopizer-$CODEBUILD_RESOLVED_SOURCE_VERSION --repository-association-arn arn:aws:codeguru-reviewer:us-west-2:545553504856:association:315ea8e8-3d66-46fa-85cd-cea7f59c5f53 --type '{"RepositoryAnalysis":{"RepositoryHead":{"BranchName":"master"}}}'
       - aws codeguru-reviewer list-code-reviews  --type RepositoryAnalysis --repository-names shopizer --state Pending > test.json
       - ARN=$(jq '.CodeReviewSummaries[0].CodeReviewArn' test.json | tr -d \")
