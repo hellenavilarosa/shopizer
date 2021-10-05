@@ -22,29 +22,31 @@ phases:
       - |
         aws sns publish --topic-arn "arn:aws:sns:us-west-2:545553504856:AnyCompany-topic" --message-structure json --message '
         {
-          "message": {
-              "account": "545553504856",
-              "detailType": "CodePipeline Stage Execution State Change",
-              "region": "us-west-2",
-              "source": "aws.codepipeline",
-              "detail": {
-                  "pipeline": "shopizer",
-                  "state": "FAILED",
-                  "stage": "Build",
-                  "version": 1
-              },
-              "resources": [
-                  "arn:aws:codepipeline:us-west-2:545553504856:shopizer"
-              ],
-              "additionalAttributes": {
-                  "failedActionCount": 1,
-                  "failedActions": [
-                      {
-                          "action": "Build",
-                          "additionalInformation": "teste"
-                      }
-                  ]
-              }
+          "default": {
+            "message": {
+                "account": "545553504856",
+                "detailType": "CodePipeline Stage Execution State Change",
+                "region": "us-west-2",
+                "source": "aws.codepipeline",
+                "detail": {
+                    "pipeline": "shopizer",
+                    "state": "FAILED",
+                    "stage": "Build",
+                    "version": 1
+                },
+                "resources": [
+                    "arn:aws:codepipeline:us-west-2:545553504856:shopizer"
+                ],
+                "additionalAttributes": {
+                    "failedActionCount": 1,
+                    "failedActions": [
+                        {
+                            "action": "Build",
+                            "additionalInformation": "teste"
+                        }
+                    ]
+                }
+            }
           }
         }'
       - $CODEBUILD_BUILD_SUCCEEDING='0
