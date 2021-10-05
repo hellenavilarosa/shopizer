@@ -20,7 +20,7 @@ phases:
       #- mvn clean install
       #- aws codeguru-reviewer wait code-review-completed --code-review-arn $ARN
       - recomendation_num=$(echo $(aws codeguru-reviewer list-recommendations --code-review-arn $ARN) | jq -r '.RecommendationSummaries | length')
-      - curl -H "Content-type:application/json" --data '{"channel":"C123456","blocks":[{"type":"section","text":{"type":"mrkdwn","text":"Hi we've found more than 10 recomendations from CodeGuru Review. It's recommended that you fix this recomendations"}}]}' -H "Authorization:${slack_token}" -X POST ${slack_webhook}
+      - curl -H "Content-type:application/json" --data '{"channel":"C123456","blocks":[{"type":"section","text":{"type":"mrkdwn","text":"Hi we've found more than 10 recomendations from CodeGuru Review."}}]}' -H "Authorization:${slack_token}" -X POST ${slack_webhook}
 
       - echo ${recomendation_num}
       - |
