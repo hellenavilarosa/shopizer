@@ -8,8 +8,6 @@ phases:
     commands:
       - echo $Execution_ID
       - echo $CODEBUILD_BUILD_ID
-      - curl -H "Content-type:application/json" --data '{"channel":"C123456","blocks":[{"type":"section","text":{"type":"mrkdwn","text":"Hi I am a bot that can post *_fancy_* messages to any public channel."}}]}' -H "Authorization:${slack_token}" -X POST ${slack_webhook}
-      #- aws codepipeline put-job-failure-result --job-id ${Execution_ID} --failure-details '{"type":"JobFailed","message":"Deu merda"}'
       - aws codeguru-reviewer create-code-review --name shopizer-$CODEBUILD_RESOLVED_SOURCE_VERSION --repository-association-arn arn:aws:codeguru-reviewer:us-west-2:545553504856:association:315ea8e8-3d66-46fa-85cd-cea7f59c5f53 --type '{"RepositoryAnalysis":{"RepositoryHead":{"BranchName":"master"}}}'
       - aws codeguru-reviewer list-code-reviews  --type RepositoryAnalysis --repository-names shopizer --state Pending > test.json
       - ARN=$(jq '.CodeReviewSummaries[0].CodeReviewArn' test.json | tr -d \")
@@ -20,8 +18,10 @@ phases:
       - yum install jq -y
       - mvn --version
       #- mvn clean install
-      #-  aws codeguru-reviewer wait code-review-completed --code-review-arn $ARN
+      - aws codeguru-reviewer wait code-review-completed --code-review-arn $ARN
       - recomendation_num=$(echo $(aws codeguru-reviewer list-recommendations --code-review-arn $ARN) | jq -r '.RecommendationSummaries | length')
+      - curl -H "Content-type:application/json" --data '{"channel":"C123456","blocks":[{"type":"section","text":{"type":"mrkdwn","text":"Hi we found ${recomendation_num} errors in codeguru review."}}]}' -H "Authorization:${slack_token}" -X POST ${slack_webhook}
+
       - echo ${recomendation_num}
       - |
         aws sns publish --topic-arn "arn:aws:sns:us-west-2:545553504856:AnyCompany-topic" --message '
