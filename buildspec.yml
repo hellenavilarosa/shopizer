@@ -22,7 +22,7 @@ phases:
       - |
         aws sns publish --topic-arn "arn:aws:sns:us-west-2:545553504856:AnyCompany-topic" --message-structure json --message '
         {
-          "default": {
+          "email-json": {
             "message": {
                 "account": "545553504856",
                 "detailType": "CodePipeline Stage Execution State Change",
