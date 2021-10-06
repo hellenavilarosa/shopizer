@@ -1,5 +1,7 @@
 version: 0.2
-
+proxy:
+  upload-artifacts: yes
+  logs: yes
 phases:
   install:
     runtime-versions:
@@ -15,7 +17,7 @@ phases:
       # - yum install -y apache-maven
       # - yum install jq -y
       - mvn --version
-      - mvn clean install 
+      - mvn clean install
       #- aws codeguru-reviewer wait code-review-completed --code-review-arn $ARN
       - recomendation_num=$(echo $(aws codeguru-reviewer list-recommendations --code-review-arn $ARN) | jq -r '.RecommendationSummaries | length')
       - curl -H "Content-type:application/json" --data '{"channel":"C123456","blocks":[{"type":"section","text":{"type":"mrkdwn","text":"Hi,\n we found more than *10 recomendations* from *CodeGuru Review*.\n Please, take a look :eyes:"}}]}' -H "Authorization:${slack_token}" -X POST ${slack_webhook}
@@ -23,7 +25,7 @@ phases:
       - echo Logging in to Amazon ECR...
       - AccountID=$(aws sts get-caller-identity --query Account --output text)
       - CommitID="$(echo $GitCommitID | head -c 8)"
-      - $(aws ecr get-login --registry-ids $AccountID --no-include-email --region ${AWS_DEFAULT_REGION})
+      - aws ecr get-login --registry-ids $AccountID --no-include-email --region ${AWS_DEFAULT_REGION}
       - REPOSITORY_URI=545553504856.dkr.ecr.us-west-2.amazonaws.com/shopizer
       - CommitID=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - echo ${CommitID}
