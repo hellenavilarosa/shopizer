@@ -1,4 +1,4 @@
-FROM public.ecr.aws/g0p9z9q3/openjdk:8-jdk-alpine
+FROM openjdk:8
 COPY ./target/ROOT.war /usr/src/project/
 ADD ./SALESMANAGER.h2.db /usr/src/project/
 COPY ./files/ /usr/src/project/files/

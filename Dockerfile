@@ -1,4 +1,4 @@
-FROM public.ecr.aws/amazoncorretto/amazoncorretto:latest
+FROM openjdk:8
 
 ADD sm-core-model/pom.xml sm-core-model/pom.xml
 ADD sm-core-modules/pom.xml sm-core-modules/pom.xml
