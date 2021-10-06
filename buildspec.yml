@@ -6,49 +6,20 @@ phases:
       docker: 19
   pre_build:
     commands:
-      - echo $Execution_ID
-      - echo $CODEBUILD_BUILD_ID
       - aws codeguru-reviewer create-code-review --name shopizer-$CODEBUILD_RESOLVED_SOURCE_VERSION --repository-association-arn arn:aws:codeguru-reviewer:us-west-2:545553504856:association:315ea8e8-3d66-46fa-85cd-cea7f59c5f53 --type '{"RepositoryAnalysis":{"RepositoryHead":{"BranchName":"master"}}}'
       - aws codeguru-reviewer list-code-reviews  --type RepositoryAnalysis --repository-names shopizer --state Pending > test.json
       - ARN=$(jq '.CodeReviewSummaries[0].CodeReviewArn' test.json | tr -d \")
       - echo ${ARN}
-      - wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
-      - sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
-      #- yum install -y apache-maven
-      - yum install jq -y
+      # - wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
+      # - sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
+      # - yum install -y apache-maven
+      # - yum install jq -y
       - mvn --version
-      #- mvn clean install
+      - mvn clean install
       #- aws codeguru-reviewer wait code-review-completed --code-review-arn $ARN
       - recomendation_num=$(echo $(aws codeguru-reviewer list-recommendations --code-review-arn $ARN) | jq -r '.RecommendationSummaries | length')
-      - curl -H "Content-type:application/json" --data '{"channel":"C123456","blocks":[{"type":"section","text":{"type":"mrkdwn","text":"Hi,\n we found more than *10 recomendations* from CodeGuru Review.\n Please, take a look :eyes:"}}]}' -H "Authorization:${slack_token}" -X POST ${slack_webhook}
-
+      - curl -H "Content-type:application/json" --data '{"channel":"C123456","blocks":[{"type":"section","text":{"type":"mrkdwn","text":"Hi,\n we found more than *10 recomendations* from *CodeGuru Review*.\n Please, take a look :eyes:"}}]}' -H "Authorization:${slack_token}" -X POST ${slack_webhook}
       - echo ${recomendation_num}
-      - |
-        aws sns publish --topic-arn "arn:aws:sns:us-west-2:545553504856:AnyCompany-topic" --message '
-        {
-          "account": "545553504856",
-          "detailType": "CodePipeline Stage Execution State Change",
-          "region": "us-west-2",
-          "source": "aws.codepipeline",
-          "detail": {
-              "pipeline": "shopizer",
-              "state": "FAILED",
-              "stage": "Build",
-              "version": 1
-          },
-          "resources": [
-            "arn:aws:codepipeline:us-west-2:545553504856:shopizer"
-          ],
-          "additionalAttributes": {
-            "failedActionCount": 1,
-            "failedActions": [
-                {
-                  "action": "Build",
-                  "additionalInformation": "teste"
-                }
-              ]
-          }
-        }'
       - echo Logging in to Amazon ECR...
       - AccountID=$(aws sts get-caller-identity --query Account --output text)
       - CommitID="$(echo $GitCommitID | head -c 8)"
