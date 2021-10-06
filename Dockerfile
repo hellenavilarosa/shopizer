@@ -1,10 +1,15 @@
-FROM openjdk:8
+FROM public.ecr.aws/amazoncorretto/amazoncorretto:latest
 
 ADD sm-core-model/pom.xml sm-core-model/pom.xml
 ADD sm-core-modules/pom.xml sm-core-modules/pom.xml
 ADD sm-core/pom.xml sm-core/pom.xml
 ADD sm-shop-model/pom.xml sm-shop-model/pom.xml
 ADD sm-shop/pom.xml sm-shop/pom.xml
+
+RUN yum install -y yum-utils
+RUN yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+RUN yum install docker-ce docker-ce-cli containerd.io -y
+RUN systemctl start docker
 
 RUN yum install wget -y
 RUN wget https://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo

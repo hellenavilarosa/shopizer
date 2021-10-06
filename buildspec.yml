@@ -1,7 +1,7 @@
 version: 0.2
-proxy:
-  upload-artifacts: yes
-  logs: yes
+# proxy:
+#   upload-artifacts: yes
+#   logs: yes
 phases:
   install:
     runtime-versions:
