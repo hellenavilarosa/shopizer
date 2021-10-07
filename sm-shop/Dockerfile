@@ -11,10 +11,10 @@ WORKDIR /usr/src/project
 RUN rm -rf /usr/local/tomcat/webapps/*
 RUN mkdir -p /usr/local/tomcat/files
 
-COPY /usr/src/project/ROOT.war /usr/local/tomcat/webapps/ROOT.war
-COPY  /usr/src/project/SALESMANAGER.h2.db /usr/local/tomcat/
-COPY  /usr/src/project/files/ /usr/local/tomcat/files/
-COPY  /usr/src/project/codeguru-profiler-java-agent-standalone-1.2.1.jar /usr/local/
+#COPY /usr/src/project/ROOT.war /usr/local/tomcat/webapps/ROOT.war
+#COPY  /usr/src/project/SALESMANAGER.h2.db /usr/local/tomcat/
+#COPY  /usr/src/project/files/ /usr/local/tomcat/files/
+#COPY  /usr/src/project/codeguru-profiler-java-agent-standalone-1.2.1.jar /usr/local/
 
 RUN chmod -R o+x /usr/local/
 
