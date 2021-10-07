@@ -18,7 +18,7 @@ RUN mkdir -p /usr/local/tomcat/files
 
 RUN chmod -R o+x /usr/local/
 
-ENV JAVA_OPTS="-Xmx1024m -javaagent:/usr/local/codeguru-profiler-java-agent-standalone-1.2.1.jar='profilingGroupName:shopizer,heapSummaryEnabled:true'"
+ENV JAVA_OPTS="-Xms1024m -Xmx1024m -XX:MaxPermSize=256m -javaagent:/usr/local/codeguru-profiler-java-agent-standalone-1.2.1.jar='profilingGroupName:shopizer,heapSummaryEnabled:true'"
 
 CMD ["catalina.sh", "run"]
 
