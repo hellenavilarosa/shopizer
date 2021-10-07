@@ -1,4 +1,4 @@
-FROM tomcat:9.0.10-jre8
+FROM public.ecr.aws/b3b9b3w1/tomcat:latest
 
 COPY ./target/ROOT.war /usr/local/tomcat/webapps/ROOT.war
 ADD ./SALESMANAGER.h2.db /usr/local/tomcat/
