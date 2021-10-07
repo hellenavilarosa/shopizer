@@ -35,6 +35,7 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...
       - cd sm-shop
+      - dockerd
       - docker build -t ${REPOSITORY_URI}:${CommitID} .
       - docker tag ${REPOSITORY_URI}:${CommitID} ${REPOSITORY_URI}:latest
   post_build:
