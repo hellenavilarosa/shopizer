@@ -1,4 +1,4 @@
-FROM public.ecr.aws/b3b9b3w1/tomcat:latest
+FROM 545553504856.dkr.ecr.us-west-2.amazonaws.com/tomcat:latest
 
 COPY ./target/ROOT.war /usr/local/tomcat/webapps/ROOT.war
 ADD ./SALESMANAGER.h2.db /usr/local/tomcat/
