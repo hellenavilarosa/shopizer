@@ -38,7 +38,6 @@ phases:
       - ls ..
       - ls
       - dockerd &> /dev/null &
-      - ls /usr/src/project/
       - docker build -t ${REPOSITORY_URI}:${CommitID} .
       - docker tag ${REPOSITORY_URI}:${CommitID} ${REPOSITORY_URI}:latest
   post_build:
