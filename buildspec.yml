@@ -17,10 +17,14 @@ phases:
       # - yum install -y apache-maven
       # - yum install jq -y
       - mvn --version
-      - mvn clean install
+    #  - mvn clean install
       #- aws codeguru-reviewer wait code-review-completed --code-review-arn $ARN
       - recomendation_num=$(echo $(aws codeguru-reviewer list-recommendations --code-review-arn $ARN) | jq -r '.RecommendationSummaries | length')
-      - curl -H "Content-type:application/json" --data '{"channel":"C123456","blocks":[{"type":"section","text":{"type":"mrkdwn","text":"Hi,\n we found more than *10 recomendations* from *CodeGuru Review*.\n Please, take a look :eyes:"}}]}' -H "Authorization:${slack_token}" -X POST ${slack_webhook}
+      - |
+      - if [ ${recomendation_num} > '10' ] ; then
+            curl -H "Content-type:application/json" --data '{"channel":"C123456","blocks":[{"type":"section","text":{"type":"mrkdwn","text":"Hi,\n we found more than *10 recomendations* from *CodeGuru Review*.\n Please, take a look :eyes:"}}]}' -H "Authorization:${slack_token}" -X POST ${slack_webhook} ;
+          fi
+      - |
       - echo ${recomendation_num}
       - echo Logging in to Amazon ECR...
       - AccountID=$(aws sts get-caller-identity --query Account --output text)
@@ -34,10 +38,8 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...
       - cd sm-shop
-      - ls ..
-      - ls
       - dockerd &> /dev/null &
-      - docker login --username AWS -p $(aws ecr get-login-password --region us-west-2) 545553504856.dkr.ecr.us-west-2.amazonaws.com 
+      - docker login --username AWS -p $(aws ecr get-login-password --region us-west-2) 545553504856.dkr.ecr.us-west-2.amazonaws.com
       - docker build -t ${REPOSITORY_URI}:${CommitID} .
       - docker tag ${REPOSITORY_URI}:${CommitID} ${REPOSITORY_URI}:latest
   post_build:
