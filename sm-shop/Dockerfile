@@ -8,6 +8,8 @@ WORKDIR /usr/src/project
 
 #FROM tomcat:9.0.10-jre8
 
+RUN chmod -R o+x /usr/local/
+
 RUN rm -rf /usr/local/tomcat/webapps/*
 RUN mkdir -p /usr/local/tomcat/files
 
