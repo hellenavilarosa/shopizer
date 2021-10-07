@@ -22,4 +22,4 @@ ENV JAVA_OPTS="-Xmx1024m -javaagent:/usr/local/codeguru-profiler-java-agent-stan
 
 CMD ["catalina.sh", "run"]
 
-EXPOSE 5801
+EXPOSE 8080
