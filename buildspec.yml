@@ -17,7 +17,7 @@ phases:
       # - yum install -y apache-maven
       # - yum install jq -y
       - mvn --version
-    #  - mvn clean install
+      - mvn clean install
       #- aws codeguru-reviewer wait code-review-completed --code-review-arn $ARN
       - recomendation_num=$(echo $(aws codeguru-reviewer list-recommendations --code-review-arn $ARN) | jq -r '.RecommendationSummaries | length')
       - |
