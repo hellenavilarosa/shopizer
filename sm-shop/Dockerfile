@@ -1,4 +1,4 @@
-FROM public.ecr.aws/bitnami/tomcat:latest
+FROM public.ecr.aws/e8m3q4l4/tomcat:latest
 
 COPY ./target/ROOT.war /usr/local/tomcat/webapps/ROOT.war
 ADD ./SALESMANAGER.h2.db /usr/local/tomcat/
@@ -7,8 +7,6 @@ COPY ./codeguru-profiler-java-agent-standalone-1.2.1.jar /usr/local/
 WORKDIR /usr/src/project
 
 #FROM tomcat:9.0.10-jre8
-
-RUN chmod -R o+x /usr/local/
 
 RUN rm -rf /usr/local/tomcat/webapps/*
 RUN mkdir -p /usr/local/tomcat/files
