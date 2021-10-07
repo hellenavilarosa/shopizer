@@ -25,7 +25,7 @@ phases:
       - echo Logging in to Amazon ECR...
       - AccountID=$(aws sts get-caller-identity --query Account --output text)
       - CommitID="$(echo $GitCommitID | head -c 8)"
-      - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 545553504856.dkr.ecr.us-west-2.amazonaws.com
+      - docker login --username AWS -p $(aws ecr get-login-password --region us-west-2) 545553504856.dkr.ecr.us-west-2.amazonaws.com 
       - REPOSITORY_URI=545553504856.dkr.ecr.us-west-2.amazonaws.com/shopizer
       - CommitID=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - echo ${CommitID}
