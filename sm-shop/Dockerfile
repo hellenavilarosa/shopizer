@@ -1,9 +1,9 @@
 FROM tomcat:9.0.10-jre8
 
-COPY ./target/ROOT.war /usr/src/project/
-ADD ./SALESMANAGER.h2.db /usr/src/project/
-COPY ./files/ /usr/src/project/files/
-COPY ./codeguru-profiler-java-agent-standalone-1.2.1.jar /usr/src/project/
+COPY ./target/ROOT.war /usr/local/tomcat/webapps/ROOT.war
+ADD ./SALESMANAGER.h2.db /usr/local/tomcat/
+COPY ./files/ /usr/local/tomcat/files/
+COPY ./codeguru-profiler-java-agent-standalone-1.2.1.jar /usr/local/
 WORKDIR /usr/src/project
 
 #FROM tomcat:9.0.10-jre8
