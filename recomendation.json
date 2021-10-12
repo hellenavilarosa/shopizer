@@ -1,0 +1,805 @@
+{
+   "RecommendationSummaries":[
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/admin/controller/products/CustomProductGroupsController.java",
+         "RecommendationId":"0060af3d14691441f76ca0d94bf8ef0013c7080c074cd5405cde56d03e24d762",
+         "StartLine":227,
+         "EndLine":227,
+         "Description":"We found 3 occurrences of handling an exception thrown by 'ProductRelationshipService.saveOrUpdate' in your code. The selected code shows an occurrence in which the creation of the logged or thrown message is different from the others. We recommend handling all messages the same way. The following is an example of how most of these exceptions are handled in your code: shopizer/sm-shop/src/main/java/com/salesmanager/shop/admin/controller/products/RelatedItemsController.java#L213",
+         "RecommendationCategory":"CodeInconsistencies"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/store/controller/order/facade/OrderFacadeImpl.java",
+         "RecommendationId":"00effc0dc3029b9b95bf5113bd7e849e1177ad3ad04cca5d763b120315981bdd",
+         "StartLine":1586,
+         "EndLine":1586,
+         "Description":"Exception [ResourceNotFoundException] is explicitly thrown on this line but is caught in the outer catch clause with generic exception on line [1607].  Consider adding a catch clause of this specific exception in the outer try statement.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-core-model/src/main/java/com/salesmanager/core/model/reference/language/Language.java",
+         "RecommendationId":"02421fe723a39fbd876e85bd033269e8eca1715780c33693fa94fd11f666e191",
+         "StartLine":37,
+         "EndLine":42,
+         "Description":"javax.persistence.Id annotation should not be attached to 32-bit data. Using 32-bit data types is risky because loading from the database will cause an exception when the table passes 2^32 entries. A mix of 32-bit and 64-bit values can lead to integer wrap-arounds. Consider monitoring the growth of the relevant tables to estimate when integer overflow would happen. Consider changing the field annotated with @Id from integer to long. Also consider adding an alarm that notifies you when the number of rows increases by an order of magnitude.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/modules/integration/shipping/impl/UPSShippingQuote.java",
+         "RecommendationId":"033a411e80d92a028b61eadff50423c0489b864f6bcb4fe7985d5094d54127e2",
+         "StartLine":122,
+         "EndLine":122,
+         "Description":"The cyclomatic complexity of this method is 34. By comparison, 99% of the methods in the CodeGuru reference dataset have a lower cyclomatic complexity. This indicates the method has a high number of decisions and it can make the logic difficult to understand and test.\n\nWe recommend that you simplify this method or break it into multiple methods. For example, consider extracting the code block on lines 127-160 into a separate method.",
+         "RecommendationCategory":"CodeMaintenanceIssues"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/services/payments/PaymentServiceImpl.java",
+         "RecommendationId":"04467c32a9af2cc673bd77dfe36cddb35d2174eb92c8976413e6f49dd0647db3",
+         "StartLine":374,
+         "EndLine":374,
+         "Description":"**Problem:**\n This line of code lacks validation when processing input data through the following parameter: 'items' (index: 3 | type: List). The parameter is exposed to external callers, because its enclosing class and method are publicly accessible. This means that upstream validation, if it exists, can be bypassed. Other validated parameters: 'payment', 'order', 'store', 'customer'. The same parameter type is validated here for example: sm-core/src/main/java/com/salesmanager/core/business/modules/integration/payment/impl/PayPalExpressCheckoutPayment.java:172. Malicious, malformed, or unbounded inputs can cause unexpected runtime behavior or crashes, and can slow performance.\n\n**Fix:**\n Add checks to ensure the validity of the parameter's value, such as testing it for nullness (for example, using the @NonNull annotation as [described in the Lombok library](https://projectlombok.org/features/NonNull)), emptiness, or equality. Or to prevent direct calls to it, [reduce the method's visibility](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html).\n\n Learn more about potential threats and guidance from the [Common Weakness Enumeration website](https://cwe.mitre.org/data/definitions/693.html) and the [OWASP Cheat Sheet series](https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html).",
+         "RecommendationCategory":"InputValidations"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/modules/integration/payment/impl/StripePayment.java",
+         "RecommendationId":"05e5326147d751392dcd36d42efbc94d13525577b43ebfa0bca2291a35df3825",
+         "StartLine":119,
+         "EndLine":126,
+         "Description":"Similar code fragments were detected in the same file at the following lines: 119:126, 259:266.  \nRefactoring can help improve code maintainability. Consider reducing duplicate code by extracting it into a separate method. You can then replace duplicated code with calls to this new method.",
+         "RecommendationCategory":"DuplicateCode"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/services/payments/PaymentServiceImpl.java",
+         "RecommendationId":"07413d310bad81c8e07516d7edf7d487b94b0d8ac60cc732520e19b6cdff5f6d",
+         "StartLine":106,
+         "EndLine":106,
+         "Description":"**Problem**: Iterating over [map.keySet()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#keySet--) and calling [map.get(Key)](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#get-java.lang.Object-) to get the values within the loop is inefficient. \n**Fix**: Iterate over [map.entrySet()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#entrySet--) and access the values using [entry.getValue()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.Entry.html#getValue--) to avoid potential performance penalty due to lookup.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/modules/cms/product/aws/S3ProductContentFileManager.java",
+         "RecommendationId":"0bf8c2833d350cfc4c44637daa34fd196583af4fc667cfd4cc6ea15040784ed0",
+         "StartLine":215,
+         "EndLine":215,
+         "Description":"**Problem**: This code is uploading an object of type stream to S3 without setting the content length of the object. Failure to specify a content length will cause the entire contents of the input stream to be buffered locally in memory so that the content length can be calculated, which can result in negative performance problems.\n\n**Fix**: Specify the content length for the data stream in the object metadata parameter.\n\n[Learn more](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/s3/model/PutObjectRequest.html#PutObjectRequest-java.lang.String-java.lang.String-java.io.InputStream-com.amazonaws.services.s3.model.ObjectMetadata-)",
+         "RecommendationCategory":"AWSBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/store/controller/order/ShoppingOrderController.java",
+         "RecommendationId":"0c7dbc146137388cc3f2f7b09ad6333c582b3e6caa657e525b18a5eb508dae0d",
+         "StartLine":154,
+         "EndLine":154,
+         "Description":"The cyclomatic complexity of this method is 49. By comparison, 99% of the methods in the CodeGuru reference dataset have a lower cyclomatic complexity. This indicates the method has a high number of decisions and it can make the logic difficult to understand and test.\n\nWe recommend that you simplify this method or break it into multiple methods. For example, consider extracting the code blocks on lines 286-378, lines 382-432 into separate methods.",
+         "RecommendationCategory":"CodeMaintenanceIssues"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/modules/cms/product/ProductFileManagerImpl.java",
+         "RecommendationId":"0cbe98adec4204db4123051830c653796f2a7747abba26fa957182d97e959687",
+         "StartLine":216,
+         "EndLine":216,
+         "Description":"The result of deleting a file on this line should be checked and failure should be logged. java.io.File.delete() will simply return false if it fails to delete the file, for example, when the file does not exist. It will not throw unless there is a security exception.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/admin/controller/products/ManufacturerController.java",
+         "RecommendationId":"0e0d09cee7bc64ebc0370e3b81bb78fdab29e55bc0b5e22c6de3a6d165f0c769",
+         "StartLine":242,
+         "EndLine":242,
+         "Description":"The output generated by 'ManufacturerService.getById()' isn't validated before 'Manufacturer.getMerchantStore()' calls it. We recommend always validating its output. The following are examples of proper validation in your code: shopizer/sm-shop/src/main/java/com/salesmanager/shop/store/facade/manufacturer/ManufacturerFacadeImpl.java#L124, shopizer/sm-shop/src/main/java/com/salesmanager/shop/store/facade/manufacturer/ManufacturerFacadeImpl.java#L96.",
+         "RecommendationCategory":"CodeInconsistencies"
+      },
+      {
+         "FilePath":"sm-core-model/src/main/java/com/salesmanager/core/model/reference/country/Country.java",
+         "RecommendationId":"0f33739a0064407e64087eb4bed2fb01e9b8a99c26413441fc64c7eff01131fa",
+         "StartLine":33,
+         "EndLine":38,
+         "Description":"javax.persistence.Id annotation should not be attached to 32-bit data. Using 32-bit data types is risky because loading from the database will cause an exception when the table passes 2^32 entries. A mix of 32-bit and 64-bit values can lead to integer wrap-arounds. Consider monitoring the growth of the relevant tables to estimate when integer overflow would happen. Consider changing the field annotated with @Id from integer to long. Also consider adding an alarm that notifies you when the number of rows increases by an order of magnitude.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/admin/controller/shipping/CustomShippingMethodsController.java",
+         "RecommendationId":"0fd1ae91884581c3033aeab5120b33a7b48f42df06f163444ad687df1289c642",
+         "StartLine":704,
+         "EndLine":704,
+         "Description":"**Problem**: Iterating over [map.keySet()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#keySet--) and calling [map.get(Key)](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#get-java.lang.Object-) to get the values within the loop is inefficient. \n**Fix**: Iterate over [map.entrySet()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#entrySet--) and access the values using [entry.getValue()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.Entry.html#getValue--) to avoid potential performance penalty due to lookup.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/admin/controller/user/GroupsController.java",
+         "RecommendationId":"10a058f4040b1de9237c1ee8f9a61e1d86e25bd7b98b059a86047b3bbf55a64f",
+         "StartLine":79,
+         "EndLine":79,
+         "Description":"**Problem**: An equality operator (== or !=) is used to compare strings, which matches strings based on address.\n\n**Fix**: Do content comparison using the equals() method to compare the values of the strings.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/modules/cms/content/aws/S3StaticContentAssetsManagerImpl.java",
+         "RecommendationId":"10f969a95e2137f128320c9314e779af7489f647159312f635ed80751027a153",
+         "StartLine":167,
+         "EndLine":167,
+         "Description":"**Problem**: This code is uploading an object of type stream to S3 without setting the content length of the object. Failure to specify a content length will cause the entire contents of the input stream to be buffered locally in memory so that the content length can be calculated, which can result in negative performance problems.\n\n**Fix**: Specify the content length for the data stream in the object metadata parameter.\n\n[Learn more](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/s3/model/PutObjectRequest.html#PutObjectRequest-java.lang.String-java.lang.String-java.io.InputStream-com.amazonaws.services.s3.model.ObjectMetadata-)",
+         "RecommendationCategory":"AWSBestPractices"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/utils/ajax/AjaxResponse.java",
+         "RecommendationId":"11dc9a5aecf2d4347dc6b90c767c2f11b32d6dbc12e38875df743095a4ea8eac",
+         "StartLine":105,
+         "EndLine":105,
+         "Description":"**Problem**: Iterating over [map.keySet()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#keySet--) and calling [map.get(Key)](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#get-java.lang.Object-) to get the values within the loop is inefficient. \n**Fix**: Iterate over [map.entrySet()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#entrySet--) and access the values using [entry.getValue()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.Entry.html#getValue--) to avoid potential performance penalty due to lookup.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/modules/integration/payment/impl/StripePayment.java",
+         "RecommendationId":"128b9e5a08b8bab1d00bd08979b163d33e2fd61b8767687bade710fd214aa6ba",
+         "StartLine":133,
+         "EndLine":140,
+         "Description":"Similar code fragments were detected in the same file at the following lines: 133:140, 201:208, 273:280, 342:349.  \nRefactoring can help improve code maintainability. Consider reducing duplicate code by extracting it into a separate method. You can then replace duplicated code with calls to this new method.",
+         "RecommendationCategory":"DuplicateCode"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/services/shipping/ShippingServiceImpl.java",
+         "RecommendationId":"1378042b95fd620b2d49c978dcc8eadefcd29c24c6d3e81b7c2e667d6d207485",
+         "StartLine":375,
+         "EndLine":375,
+         "Description":"The cyclomatic complexity of this method is 64. By comparison, 99% of the methods in the CodeGuru reference dataset have a lower cyclomatic complexity. This indicates the method has a high number of decisions and it can make the logic difficult to understand and test. We recommend that you simplify this method or break it into multiple methods.",
+         "RecommendationCategory":"CodeMaintenanceIssues"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/store/controller/order/ShoppingOrderController.java",
+         "RecommendationId":"1653a7110bc55c28f9a46be8c1c7d63dd1aeffbbf4761ecdbd158bd8265a8f46",
+         "StartLine":669,
+         "EndLine":669,
+         "Description":"The cyclomatic complexity of this method is 43. By comparison, 99% of the methods in the CodeGuru reference dataset have a lower cyclomatic complexity. This indicates the method has a high number of decisions and it can make the logic difficult to understand and test.\n\nWe recommend that you simplify this method or break it into multiple methods. For example, consider extracting the code block on lines 686-699 into a separate method.",
+         "RecommendationCategory":"CodeMaintenanceIssues"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/store/api/v1/customer/AuthenticateCustomerApi.java",
+         "RecommendationId":"17fa9d3f6f29f7adb1feef1a2ca4a2cfd9f70df0b08452a7b7fd81595570544a",
+         "StartLine":250,
+         "EndLine":250,
+         "Description":"Exception [ResourceNotFoundException] is explicitly thrown on this line but is caught in the outer catch clause with generic exception on line [256].  Consider adding a catch clause of this specific exception in the outer try statement.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/store/controller/order/facade/OrderFacadeImpl.java",
+         "RecommendationId":"19bbc7cf09f445fc3f4cb277920da5b4616405b6cfa54a9e50e0619f951e0378",
+         "StartLine":114,
+         "EndLine":114,
+         "Description":"This class references 122 other classes. By comparison, 99% of the classes in the CodeGuru reference dataset reference fewer. This indicates that this class is highly coupled with other classes. A class that is highly coupled with other classes is difficult to understand and its behavior might change unexpectedly when one of its referenced classes is updated. High coupling could also increase the integration test complexity, maintenance cost and technical debt. We recommend that you simplify this class or break it into multiple classes.",
+         "RecommendationCategory":"CodeMaintenanceIssues"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/populator/order/PersistableOrderApiPopulator.java",
+         "RecommendationId":"1c9524f49afa905d5f34e6fa4e6bac08bff79b2c4f503f06211b9b0e615c49bc",
+         "StartLine":85,
+         "EndLine":85,
+         "Description":"**Problem**: While wrapping the caught exception into a custom one, information about the caught exception is being lost, including information about the stack trace of the exception.\n\n**Fix**: If the caught exception object does not contain sensitive information, consider passing it as the \"rootCause\" or inner exception parameter to the constructor of the new exception before throwing the new exception. (Note that not all exception constructors support inner exceptions. Use a wrapper exception that supports inner exceptions.) \n[Learn more](https://www.ibm.com/support/pages/best-practice-catching-and-re-throwing-java-exceptions)",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/store/api/v1/customer/AuthenticateCustomerApi.java",
+         "RecommendationId":"1cdd24839f45f152daa5d7a12452a39ae46e25c9f79d6614b0b14fca9e528970",
+         "StartLine":246,
+         "EndLine":246,
+         "Description":"Exception [ResourceNotFoundException] is explicitly thrown on this line but is caught in the outer catch clause with generic exception on line [256].  Consider adding a catch clause of this specific exception in the outer try statement.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/store/controller/order/facade/OrderFacadeImpl.java",
+         "RecommendationId":"1e334c67b00dd472d87d5701e669d0c32358dc0f89d5c136aadeebd7d6304bdf",
+         "StartLine":341,
+         "EndLine":341,
+         "Description":"This method contains 131 lines of code, not including blank lines or lines with only comments, Java punctuation characters, identifiers, or literals. By comparison, 99% of the methods in the CodeGuru reference dataset contain fewer lines of code. Large methods might be difficult to read and have logic that is hard to understand and test. We recommend that you simplify this method or break it into multiple methods.",
+         "RecommendationCategory":"CodeMaintenanceIssues"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/store/facade/items/ProductItemsFacadeImpl.java",
+         "RecommendationId":"1fee176aeb35ae740f208b99aa5eb7853123e198014ea395d423d9d0e210efab",
+         "StartLine":256,
+         "EndLine":256,
+         "Description":"**Problem**: While wrapping the caught exception into a custom one, information about the caught exception is being lost, including information about the stack trace of the exception.\n\n**Fix**: If the caught exception object does not contain sensitive information, consider passing it as the \"rootCause\" or inner exception parameter to the constructor of the new exception before throwing the new exception. (Note that not all exception constructors support inner exceptions. Use a wrapper exception that supports inner exceptions.) \n[Learn more](https://www.ibm.com/support/pages/best-practice-catching-and-re-throwing-java-exceptions)",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/repositories/customer/CustomerRepositoryImpl.java",
+         "RecommendationId":"21242e9b97537c8eb00f676ea5cbeb4e11b079613e3036a3e4dc8bcd0eb6d166",
+         "StartLine":80,
+         "EndLine":80,
+         "Description":"**Problem:**\n This line of code lacks validation when processing input data through the following parameter: 'store' (index: 0 | type: MerchantStore). The parameter is exposed to external callers, because its enclosing class and method are publicly accessible. This means that upstream validation, if it exists, can be bypassed. Other validated parameters: 'criteria'. The same parameter type is validated here for example: sm-core/src/main/java/com/salesmanager/core/business/modules/integration/payment/impl/BeanStreamPayment.java:116. Malicious, malformed, or unbounded inputs can cause unexpected runtime behavior or crashes, and can slow performance.\n\n**Fix:**\n Add checks to ensure the validity of the parameter's value, such as testing it for nullness (for example, using the @NonNull annotation as [described in the Lombok library](https://projectlombok.org/features/NonNull)), emptiness, or equality. Or to prevent direct calls to it, [reduce the method's visibility](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html).\n\n Learn more about potential threats and guidance from the [Common Weakness Enumeration website](https://cwe.mitre.org/data/definitions/693.html) and the [OWASP Cheat Sheet series](https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html).",
+         "RecommendationCategory":"InputValidations"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/services/payments/PaymentServiceImpl.java",
+         "RecommendationId":"2360d035524bbb3148e504bffc0386a45b3059fe42c28e554468c6000367b77d",
+         "StartLine":173,
+         "EndLine":173,
+         "Description":"**Problem**: Iterating over [map.keySet()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#keySet--) and calling [map.get(Key)](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#get-java.lang.Object-) to get the values within the loop is inefficient. \n**Fix**: Iterate over [map.entrySet()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#entrySet--) and access the values using [entry.getValue()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.Entry.html#getValue--) to avoid potential performance penalty due to lookup.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/modules/cms/product/infinispan/CmsImageFileManagerImpl.java",
+         "RecommendationId":"2599484836e815398ae3e7a2886301f51244bbd9726d3875391b46668b056693",
+         "StartLine":189,
+         "EndLine":208,
+         "Description":"Similar code fragments were detected in the same file at the following lines: 189:208, 331:355.  \nRefactoring can help improve code maintainability. Consider reducing duplicate code by extracting it into a separate method. You can then replace duplicated code with calls to this new method.",
+         "RecommendationCategory":"DuplicateCode"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/services/reference/loader/IntegrationModulesLoader.java",
+         "RecommendationId":"261b1a9a5759a0e3aa34822ae07880d91c6914fb011ece6397cea7ec200fc7f5",
+         "StartLine":101,
+         "EndLine":101,
+         "Description":"**Problem**: Iterating over [map.keySet()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#keySet--) and calling [map.get(Key)](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#get-java.lang.Object-) to get the values within the loop is inefficient. \n**Fix**: Iterate over [map.entrySet()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#entrySet--) and access the values using [entry.getValue()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.Entry.html#getValue--) to avoid potential performance penalty due to lookup.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/modules/integration/shipping/impl/CustomWeightBasedShippingQuote.java",
+         "RecommendationId":"289c50ebfd6c82fefabbf97427a4c6b05846213d92d892c0d394a7f32e5932f7",
+         "StartLine":71,
+         "EndLine":71,
+         "Description":"**Problem**: While wrapping the caught exception into a custom one, information about the caught exception is being lost, including information about the stack trace of the exception.\n\n**Fix**: If the caught exception object does not contain sensitive information, consider passing it as the \"rootCause\" or inner exception parameter to the constructor of the new exception before throwing the new exception. (Note that not all exception constructors support inner exceptions. Use a wrapper exception that supports inner exceptions.) \n[Learn more](https://www.ibm.com/support/pages/best-practice-catching-and-re-throwing-java-exceptions)",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/services/payments/TransactionServiceImpl.java",
+         "RecommendationId":"2b9204c81356ec36e8ffb9b23fcc62a4f9293dc885f39ebe97d044a80bc03bdd",
+         "StartLine":60,
+         "EndLine":60,
+         "Description":"We found 5 occurrences of handling an exception thrown by 'ObjectMapper.readValue' in your code. The selected code shows an occurrence in which the creation of the logged or thrown message is different from the others. We recommend handling all messages the same way. The following is an example of how most of these exceptions are handled in your code: shopizer/sm-core/src/main/java/com/salesmanager/core/business/services/tax/TaxServiceImpl.java#L65",
+         "RecommendationCategory":"CodeInconsistencies"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/store/api/v1/customer/CustomerApi.java",
+         "RecommendationId":"2caaf80e0be7f605270494ddfce91c4813981cef42c85e9906c08f6928119e21",
+         "StartLine":176,
+         "EndLine":176,
+         "Description":"Exception [ResourceNotFoundException] is explicitly thrown on this line but is caught in the outer catch clause with generic exception on line [179].  Consider adding a catch clause of this specific exception in the outer try statement.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/admin/controller/orders/OrderControler.java",
+         "RecommendationId":"3081736d881ebdb7a6cffac3faf2be703eb25dabac3a6b7fb815aadd3f74a8f1",
+         "StartLine":314,
+         "EndLine":314,
+         "Description":"**Problem**: An equality operator (== or !=) is used to compare strings, which matches strings based on address.\n\n**Fix**: Do content comparison using the equals() method to compare the values of the strings.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/store/api/v1/shoppingCart/ShoppingCartApi.java",
+         "RecommendationId":"38f66b0c24b1f6f9c4e67d35b4b718f3c89378530fbfa9a479bbe6935e1fdfbe",
+         "StartLine":265,
+         "EndLine":265,
+         "Description":"**Problem**: While wrapping the caught exception into a custom one, information about the caught exception is being lost, including information about the stack trace of the exception.\n\n**Fix**: If the caught exception object does not contain sensitive information, consider passing it as the \"rootCause\" or inner exception parameter to the constructor of the new exception before throwing the new exception. (Note that not all exception constructors support inner exceptions. Use a wrapper exception that supports inner exceptions.) \n[Learn more](https://www.ibm.com/support/pages/best-practice-catching-and-re-throwing-java-exceptions)",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/modules/integration/shipping/impl/USPSShippingQuote.java",
+         "RecommendationId":"39dabe851ddbe735446a0a808126f7062435f123462edb1da9fe46d1931674c9",
+         "StartLine":208,
+         "EndLine":208,
+         "Description":"**Problem**: Iterating over [map.keySet()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#keySet--) and calling [map.get(Key)](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#get-java.lang.Object-) to get the values within the loop is inefficient. \n**Fix**: Iterate over [map.entrySet()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#entrySet--) and access the values using [entry.getValue()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.Entry.html#getValue--) to avoid potential performance penalty due to lookup.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/admin/controller/orders/OrderControler.java",
+         "RecommendationId":"3ca60d53a9c7d4e507e9e392925d0891e1120301983ef712834d619fea55172f",
+         "StartLine":216,
+         "EndLine":216,
+         "Description":"The cyclomatic complexity of this method is 34. By comparison, 99% of the methods in the CodeGuru reference dataset have a lower cyclomatic complexity. This indicates the method has a high number of decisions and it can make the logic difficult to understand and test.\n\nWe recommend that you simplify this method or break it into multiple methods. For example, consider extracting the code block on lines 251-261 into a separate method.",
+         "RecommendationCategory":"CodeMaintenanceIssues"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/store/controller/shipping/facade/ShippingFacadeImpl.java",
+         "RecommendationId":"3d42fe88b5a5dc331e8654b16d208c44452ce98195558a3fe8306274fec6ea5a",
+         "StartLine":363,
+         "EndLine":363,
+         "Description":"**Problem**: While wrapping the caught exception into a custom one, information about the caught exception is being lost, including information about the stack trace of the exception.\n\n**Fix**: If the caught exception object does not contain sensitive information, consider passing it as the \"rootCause\" or inner exception parameter to the constructor of the new exception before throwing the new exception. (Note that not all exception constructors support inner exceptions. Use a wrapper exception that supports inner exceptions.) \n[Learn more](https://www.ibm.com/support/pages/best-practice-catching-and-re-throwing-java-exceptions)",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/services/shipping/ShippingServiceImpl.java",
+         "RecommendationId":"40b821c9f8fbdd8dfa4b552a5cfc5dee352b909aaa03252e415ac94441490704",
+         "StartLine":147,
+         "EndLine":147,
+         "Description":"**Problem**: Iterating over [map.keySet()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#keySet--) and calling [map.get(Key)](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#get-java.lang.Object-) to get the values within the loop is inefficient. \n**Fix**: Iterate over [map.entrySet()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#entrySet--) and access the values using [entry.getValue()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.Entry.html#getValue--) to avoid potential performance penalty due to lookup.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/admin/controller/orders/OrderControler.java",
+         "RecommendationId":"41093635ef571814072002072bc501efaf0c5e6ba7f4d19dc3dc5dd6cfd9f7fe",
+         "StartLine":296,
+         "EndLine":296,
+         "Description":"The output generated by 'OrderService.getById()' isn't validated before 'Order.getCustomerId()' calls it. We recommend always validating its output. The following are examples of proper validation in your code: shopizer/sm-shop/src/main/java/com/salesmanager/shop/admin/controller/orders/OrderActionsControler.java#L463, shopizer/sm-shop/src/main/java/com/salesmanager/shop/admin/controller/orders/OrderActionsControler.java#L163.",
+         "RecommendationCategory":"CodeInconsistencies"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/store/facade/category/CategoryFacadeImpl.java",
+         "RecommendationId":"43d864fcc905517cc532b52b969ee818a81f04d3073f7c3c2e2387091e9f9f61",
+         "StartLine":512,
+         "EndLine":512,
+         "Description":"**Problem**: An exception is caught and re-thrown within the catch clause without any other operations being performed on the exception, making the catch clause unnecessary.\n\n**Fix**: Perform additional operations on the exception that has been caught. You can wrap a standard exception into a custom exception to add additional information or special handling. When you do that, make sure to set the original exception as the cause. Otherwise, you will lose the stack trace and message of the original exception, which will make it difficult to analyze the event that caused the exception.  \n[Learn more](https://www.ibm.com/support/pages/best-practice-catching-and-re-throwing-java-exceptions)\nSimilar issue at line numbers 514.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/store/api/v1/customer/CustomerApi.java",
+         "RecommendationId":"4c87f0775c5b89b9e4ad6809bf8e5e49c65e555eb28b648470b39ae0fa225315",
+         "StartLine":179,
+         "EndLine":179,
+         "Description":"**Problem**: While wrapping the caught exception into a custom one, information about the caught exception is being lost, including information about the stack trace of the exception.\n\n**Fix**: If the caught exception object does not contain sensitive information, consider passing it as the \"rootCause\" or inner exception parameter to the constructor of the new exception before throwing the new exception. (Note that not all exception constructors support inner exceptions. Use a wrapper exception that supports inner exceptions.) \n[Learn more](https://www.ibm.com/support/pages/best-practice-catching-and-re-throwing-java-exceptions)",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/store/api/v1/content/ContentApi.java",
+         "RecommendationId":"54ad3bf3a139115d8a3681fdc28c88c728447235400b946c5c99d1726b9d7341",
+         "StartLine":449,
+         "EndLine":449,
+         "Description":"**Problem**: While wrapping the caught exception into a custom one, information about the caught exception is being lost, including information about the stack trace of the exception.\n\n**Fix**: If the caught exception object does not contain sensitive information, consider passing it as the \"rootCause\" or inner exception parameter to the constructor of the new exception before throwing the new exception. (Note that not all exception constructors support inner exceptions. Use a wrapper exception that supports inner exceptions.) \n[Learn more](https://www.ibm.com/support/pages/best-practice-catching-and-re-throwing-java-exceptions)",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/services/system/EmailServiceImpl.java",
+         "RecommendationId":"55bc6a91268eaf06a9af4fc3ac9b875340e97b322e3b7478750823f1e19c63b5",
+         "StartLine":45,
+         "EndLine":45,
+         "Description":"**Problem**: While wrapping the caught exception into a custom one, information about the caught exception is being lost, including information about the stack trace of the exception.\n\n**Fix**: If the caught exception object does not contain sensitive information, consider passing it as the \"rootCause\" or inner exception parameter to the constructor of the new exception before throwing the new exception. (Note that not all exception constructors support inner exceptions. Use a wrapper exception that supports inner exceptions.) \n[Learn more](https://www.ibm.com/support/pages/best-practice-catching-and-re-throwing-java-exceptions)",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/utils/DateUtil.java",
+         "RecommendationId":"56b332d9f5756a9bf62b5ddf113fe6690836302872db6c928778690b594fea65",
+         "StartLine":127,
+         "EndLine":127,
+         "Description":"The SimpleDateFormat object was created without setting the time zone. Make sure that you want to use the default time zone or use letter z, Z or X in the pattern. Otherwise, if you do not call setTimeZone() on the created SimpleDateFormat object, you might get an unexpected date and time when using the object.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/services/reference/zone/ZoneServiceImpl.java",
+         "RecommendationId":"5a5996631838ceac9a8af20ec5ccf40adeebee2fc63a8f72522103c29f4b7f05",
+         "StartLine":153,
+         "EndLine":153,
+         "Description":"**Problem:**\n This line of code lacks validation when processing input data through the following parameter: 'language' (index: 0 | type: Language). The parameter is exposed to external callers, because its enclosing class and method are publicly accessible. This means that upstream validation, if it exists, can be bypassed. Other methods validating the parameter: 'getZones', 'getZones'. The same parameter type is validated here for example: sm-core/src/main/java/com/salesmanager/core/business/repositories/catalog/product/ProductRepositoryImpl.java:186. Malicious, malformed, or unbounded inputs can cause unexpected runtime behavior or crashes, and can slow performance.\n\n**Fix:**\n Add checks to ensure the validity of the parameter's value, such as testing it for nullness (for example, using the @NonNull annotation as [described in the Lombok library](https://projectlombok.org/features/NonNull)), emptiness, or equality. Or to prevent direct calls to it, [reduce the method's visibility](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html).\n\n Learn more about potential threats and guidance from the [Common Weakness Enumeration website](https://cwe.mitre.org/data/definitions/693.html) and the [OWASP Cheat Sheet series](https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html).",
+         "RecommendationCategory":"InputValidations"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/populator/catalog/ReadableProductPopulator.java",
+         "RecommendationId":"5a87079faa6d7754d60a9b015e7162b1581751c7498d38e83d727b7cef87fc26",
+         "StartLine":78,
+         "EndLine":78,
+         "Description":"The cyclomatic complexity of this method is 68. By comparison, 99% of the methods in the CodeGuru reference dataset have a lower cyclomatic complexity. This indicates the method has a high number of decisions and it can make the logic difficult to understand and test. We recommend that you simplify this method or break it into multiple methods.",
+         "RecommendationCategory":"CodeMaintenanceIssues"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/services/payments/PaymentServiceImpl.java",
+         "RecommendationId":"5aee60075f16bd8fa97889749be10f651195dd2a560be85ee523065aa66b5617",
+         "StartLine":577,
+         "EndLine":577,
+         "Description":"**Problem**: While wrapping the caught exception into a custom one, information about the caught exception is being lost, including information about the stack trace of the exception.\n\n**Fix**: If the caught exception object does not contain sensitive information, consider passing it as the \"rootCause\" or inner exception parameter to the constructor of the new exception before throwing the new exception. (Note that not all exception constructors support inner exceptions. Use a wrapper exception that supports inner exceptions.) \n[Learn more](https://www.ibm.com/support/pages/best-practice-catching-and-re-throwing-java-exceptions)",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/store/controller/store/facade/StoreFacadeImpl.java",
+         "RecommendationId":"5bcbc051c1e31982163fa3f31fed3231fe62e8dbbe7f348dc6e71df260469448",
+         "StartLine":329,
+         "EndLine":329,
+         "Description":"**Problem**: While wrapping the caught exception into a custom one, information about the caught exception is being lost, including information about the stack trace of the exception.\n\n**Fix**: If the caught exception object does not contain sensitive information, consider passing it as the \"rootCause\" or inner exception parameter to the constructor of the new exception before throwing the new exception. (Note that not all exception constructors support inner exceptions. Use a wrapper exception that supports inner exceptions.) \n[Learn more](https://www.ibm.com/support/pages/best-practice-catching-and-re-throwing-java-exceptions)",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/store/controller/order/facade/OrderFacadeImpl.java",
+         "RecommendationId":"5da1987c8e645c271263dc0969cd43d87f40053a4bd369d424370920596f8742",
+         "StartLine":1140,
+         "EndLine":1140,
+         "Description":"**Problem**: While wrapping the caught exception into a custom one, information about the caught exception is being lost, including information about the stack trace of the exception.\n\n**Fix**: If the caught exception object does not contain sensitive information, consider passing it as the \"rootCause\" or inner exception parameter to the constructor of the new exception before throwing the new exception. (Note that not all exception constructors support inner exceptions. Use a wrapper exception that supports inner exceptions.) \n[Learn more](https://www.ibm.com/support/pages/best-practice-catching-and-re-throwing-java-exceptions)",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/modules/integration/shipping/impl/DefaultPackagingImpl.java",
+         "RecommendationId":"6074e5c841c7bdcad1a51b2866a888d0e9fe7a28e2eedcbc1e700aad36379e36",
+         "StartLine":38,
+         "EndLine":38,
+         "Description":"This method contains 139 lines of code, not including blank lines or lines with only comments, Java punctuation characters, identifiers, or literals. By comparison, 99% of the methods in the CodeGuru reference dataset contain fewer lines of code. Large methods might be difficult to read and have logic that is hard to understand and test.\n\nWe recommend that you simplify this method or break it into multiple methods. For example, consider extracting the code block on lines 78-143 into a separate method.",
+         "RecommendationCategory":"CodeMaintenanceIssues"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/services/tax/TaxServiceImpl.java",
+         "RecommendationId":"611ed8ff0ece4ef062d2b622146e0421f9df2b30525d64725137d17b809c9024",
+         "StartLine":92,
+         "EndLine":92,
+         "Description":"The cyclomatic complexity of this method is 41. By comparison, 99% of the methods in the CodeGuru reference dataset have a lower cyclomatic complexity. This indicates the method has a high number of decisions and it can make the logic difficult to understand and test.\n\nWe recommend that you simplify this method or break it into multiple methods. For example, consider extracting the code block on lines 141-158 into a separate method.",
+         "RecommendationCategory":"CodeMaintenanceIssues"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/filter/StoreFilter.java",
+         "RecommendationId":"650f8b4e0dc4df833ee4d97ffc27743b628acacecd160d8a00622934427deb2e",
+         "StartLine":817,
+         "EndLine":817,
+         "Description":"**Problem**: Iterating over [map.keySet()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#keySet--) and calling [map.get(Key)](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#get-java.lang.Object-) to get the values within the loop is inefficient. \n**Fix**: Iterate over [map.entrySet()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#entrySet--) and access the values using [entry.getValue()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.Entry.html#getValue--) to avoid potential performance penalty due to lookup.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-core-model/src/main/java/com/salesmanager/core/model/reference/currency/Currency.java",
+         "RecommendationId":"6622644b52aa9655e2c52f6e63a103e958171be5f5befca445e6ab3e8e9b5358",
+         "StartLine":72,
+         "EndLine":72,
+         "Description":"**Problem**: An equality operator (== or !=) is used to compare strings, which matches strings based on address.\n\n**Fix**: Do content comparison using the equals() method to compare the values of the strings.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/modules/integration/shipping/impl/USPSShippingQuote.java",
+         "RecommendationId":"6644511ea25412ac41468f827068cecaaa9a1100a660f753a87b24b138f3d776",
+         "StartLine":383,
+         "EndLine":383,
+         "Description":"We found 3 occurrences of handling an exception thrown by 'ProductPriceUtils.getAdminFormatedAmount' in your code. We recommend using catch with 'IntegrationException.<instanceof>' or an equivalent exception that provides the same level of detail. The selected code shows an occurrence that doesn't do this. The following is an example in your code of using catch to provide the recommended detail: shopizer/sm-core/src/main/java/com/salesmanager/core/business/modules/integration/payment/impl/BeanStreamPayment.java#L94",
+         "RecommendationCategory":"CodeInconsistencies"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/admin/controller/customers/CustomerOptionsSetController.java",
+         "RecommendationId":"67f44695dccfa78b5ffa7ec891800b3b97347c9006363b36510ab5ba10f201d8",
+         "StartLine":341,
+         "EndLine":341,
+         "Description":"We found 34 occurrences of handling an exception thrown by 'Long.parseLong' in your code. The selected code shows an occurrence in which the creation of the logged or thrown message is different from the others. We recommend handling all messages the same way. The following is an example of how most of these exceptions are handled in your code: shopizer/sm-shop/src/main/java/com/salesmanager/shop/admin/controller/products/ProductAttributeController.java#L410",
+         "RecommendationCategory":"CodeInconsistencies"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/services/content/ContentServiceImpl.java",
+         "RecommendationId":"6a5bea0f4c6d8d7160ad619afa587811de175335aafabdc5f3f68f268684aad1",
+         "StartLine":194,
+         "EndLine":214,
+         "Description":"Similar code fragments were detected in the same file at the following lines: 194:214, 220:242.  \nRefactoring can help improve code maintainability. Consider reducing duplicate code by extracting it into a separate method. You can then replace duplicated code with calls to this new method.",
+         "RecommendationCategory":"DuplicateCode"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/admin/controller/shipping/CustomShippingMethodsController.java",
+         "RecommendationId":"6d817fe7b796c6d56bc9b73c7a642eb1181de61be1abc9c19db2fd975362061a",
+         "StartLine":532,
+         "EndLine":532,
+         "Description":"We found 4 occurrences of handling an exception thrown by 'ProductPriceUtils.getAdminFormatedAmountWithCurrency' in your code. The selected code shows an occurrence in which the creation of the logged or thrown message is different from the others. We recommend handling all messages the same way. The following is an example of how most of these exceptions are handled in your code: shopizer/sm-shop/src/main/java/com/salesmanager/shop/admin/controller/products/ProductAttributeController.java#L151",
+         "RecommendationCategory":"CodeInconsistencies"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/modules/integration/payment/impl/Stripe3Payment.java",
+         "RecommendationId":"705ec76c6714c77792d831045246527e3adabc5ec336482e678c86079349dc1c",
+         "StartLine":156,
+         "EndLine":163,
+         "Description":"Similar code fragments were detected in the same file at the following lines: 156:163, 285:292.  \nRefactoring can help improve code maintainability. Consider reducing duplicate code by extracting it into a separate method. You can then replace duplicated code with calls to this new method.",
+         "RecommendationCategory":"DuplicateCode"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/utils/DateUtil.java",
+         "RecommendationId":"75978a0fb7caf7e9894effcde40a6cab75eaea16a6af622e9f656c6b04432338",
+         "StartLine":67,
+         "EndLine":67,
+         "Description":"The SimpleDateFormat object was created without setting the time zone. Make sure that you want to use the default time zone or use letter z, Z or X in the pattern. Otherwise, if you do not call setTimeZone() on the created SimpleDateFormat object, you might get an unexpected date and time when using the object.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/utils/DateUtil.java",
+         "RecommendationId":"7860282979905c3684e41a2eaaf51025d92462f53ba033f6a1b48c29e0c41f84",
+         "StartLine":44,
+         "EndLine":44,
+         "Description":"The SimpleDateFormat object was created without setting the time zone. Make sure that you want to use the default time zone or use letter z, Z or X in the pattern. Otherwise, if you do not call setTimeZone() on the created SimpleDateFormat object, you might get an unexpected date and time when using the object.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/admin/controller/orders/OrderControler.java",
+         "RecommendationId":"79a7c3484c5a0b85b3fe6e8e2060a6a3aa78522f3ab5dc8225d606e56ac43b6c",
+         "StartLine":183,
+         "EndLine":183,
+         "Description":"**Problem**: An equality operator (== or !=) is used to compare strings, which matches strings based on address.\n\n**Fix**: Do content comparison using the equals() method to compare the values of the strings.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/admin/controller/products/ProductController.java",
+         "RecommendationId":"7b64a15c46cda2a11d0bf17957db85ba38ef5cfd3725ebfcf0c5f71073e2b8b8",
+         "StartLine":265,
+         "EndLine":265,
+         "Description":"The cyclomatic complexity of this method is 43. By comparison, 99% of the methods in the CodeGuru reference dataset have a lower cyclomatic complexity. This indicates the method has a high number of decisions and it can make the logic difficult to understand and test.\n\nWe recommend that you simplify this method or break it into multiple methods. For example, consider extracting the code block on lines 288-298 into a separate method.",
+         "RecommendationCategory":"CodeMaintenanceIssues"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/services/shipping/ShippingServiceImpl.java",
+         "RecommendationId":"7b6b9d750c05abddb16523f037a3e3dea98b284f88273848f723d18bd4caa08a",
+         "StartLine":131,
+         "EndLine":131,
+         "Description":"**Problem**: While wrapping the caught exception into a custom one, information about the caught exception is being lost, including information about the stack trace of the exception.\n\n**Fix**: If the caught exception object does not contain sensitive information, consider passing it as the \"rootCause\" or inner exception parameter to the constructor of the new exception before throwing the new exception. (Note that not all exception constructors support inner exceptions. Use a wrapper exception that supports inner exceptions.) \n[Learn more](https://www.ibm.com/support/pages/best-practice-catching-and-re-throwing-java-exceptions)",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/store/controller/order/ShoppingOrderPaymentController.java",
+         "RecommendationId":"7d5e5739a5dde3ef27e3da57143854f37ceb9723e99d63e61db4741d8a1cab80",
+         "StartLine":114,
+         "EndLine":114,
+         "Description":"**Problem**: Iterating over [map.keySet()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#keySet--) and calling [map.get(Key)](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#get-java.lang.Object-) to get the values within the loop is inefficient. \n**Fix**: Iterate over [map.entrySet()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#entrySet--) and access the values using [entry.getValue()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.Entry.html#getValue--) to avoid potential performance penalty due to lookup.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/store/api/v1/shipping/ShippingConfigurationApi.java",
+         "RecommendationId":"8231f67393e7587c7d2a927595922065f744ceff0896eb84def2fdc1f0a23ba1",
+         "StartLine":217,
+         "EndLine":219,
+         "Description":"It is more convenient and readable to directly use Stream::anyMatch instead of Stream::filter, Stream::findAny, and Optional::isPresent when the matched data returned by Stream::findAny is not used anywhere else.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/store/controller/store/facade/StoreFacadeImpl.java",
+         "RecommendationId":"82c32850620ea1205382f52fa69f87051030342377739f32f001eda81e8e06c4",
+         "StartLine":373,
+         "EndLine":373,
+         "Description":"**Problem**: While wrapping the caught exception into a custom one, information about the caught exception is being lost, including information about the stack trace of the exception.\n\n**Fix**: If the caught exception object does not contain sensitive information, consider passing it as the \"rootCause\" or inner exception parameter to the constructor of the new exception before throwing the new exception. (Note that not all exception constructors support inner exceptions. Use a wrapper exception that supports inner exceptions.) \n[Learn more](https://www.ibm.com/support/pages/best-practice-catching-and-re-throwing-java-exceptions)",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/modules/integration/shipping/impl/UPSShippingQuote.java",
+         "RecommendationId":"8384b77d249cf1b42717239575b83faf8631bb3cf28f5c41d737cb7975fe7038",
+         "StartLine":190,
+         "EndLine":190,
+         "Description":"**Problem**: Iterating over [map.keySet()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#keySet--) and calling [map.get(Key)](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#get-java.lang.Object-) to get the values within the loop is inefficient. \n**Fix**: Iterate over [map.entrySet()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#entrySet--) and access the values using [entry.getValue()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.Entry.html#getValue--) to avoid potential performance penalty due to lookup.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/utils/SanitizeUtils.java",
+         "RecommendationId":"84746849029ded953ba36842865e1ee94e9c883cd58eb6edbb28f895e0b1a1bf",
+         "StartLine":76,
+         "EndLine":76,
+         "Description":"escapeJava(), escapeHtml3(), escapeHtml4(), escapeXml(), escapeXml10(), and escapeXml11() have been deprecated in org.apache.commons.lang.StringEscapeUtils and org.apache.commons.lang3.StringEscapeUtils and do not cover the entire range of characters that have to be encoded. OWASP Java Encoder library should be used instead.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/utils/DateUtil.java",
+         "RecommendationId":"85100f99a09ad4e564c33e36277572776ed19630e6bb4c70fb92fada721266d6",
+         "StartLine":152,
+         "EndLine":152,
+         "Description":"The SimpleDateFormat object was created without setting the time zone. Make sure that you want to use the default time zone or use letter z, Z or X in the pattern. Otherwise, if you do not call setTimeZone() on the created SimpleDateFormat object, you might get an unexpected date and time when using the object.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/store/api/v1/store/MerchantStoreApi.java",
+         "RecommendationId":"85c2509c46fffd0c9f768584150de6c1f5da48469d47ecb5f58b6234173cddf7",
+         "StartLine":370,
+         "EndLine":370,
+         "Description":"**Problem**: While wrapping the caught exception into a custom one, information about the caught exception is being lost, including information about the stack trace of the exception.\n\n**Fix**: If the caught exception object does not contain sensitive information, consider passing it as the \"rootCause\" or inner exception parameter to the constructor of the new exception before throwing the new exception. (Note that not all exception constructors support inner exceptions. Use a wrapper exception that supports inner exceptions.) \n[Learn more](https://www.ibm.com/support/pages/best-practice-catching-and-re-throwing-java-exceptions)",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/mapper/catalog/PersistableProductDefinitionMapper.java",
+         "RecommendationId":"8a12c7381e2039ecc525620d686f9c79ac23f98dedce59d7fa9de834285e1601",
+         "StartLine":62,
+         "EndLine":62,
+         "Description":"The cyclomatic complexity of this method is 37. By comparison, 99% of the methods in the CodeGuru reference dataset have a lower cyclomatic complexity. This indicates the method has a high number of decisions and it can make the logic difficult to understand and test. We recommend that you simplify this method or break it into multiple methods.",
+         "RecommendationCategory":"CodeMaintenanceIssues"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/modules/cart/IndexShoppingCartProcessor.java",
+         "RecommendationId":"8a4389bfaf657763427c702d899008577b678c9a01e3c9e8025618a1caa1ed96",
+         "StartLine":40,
+         "EndLine":40,
+         "Description":"**Problem**\nAnalysis of this package determined that this line of code contains a resource that might not have closed properly. A resource leak can slow down or crash your system.\n\n**Fix**\nConsider closing the following resource in a try-finally block: *client*. The resource is referenced at line 54. The resource is closed at line 61. There are other execution paths that do not contain closure statements, for example, when ObjectMapper.configure throws an exception.\n\n**More info**\n[View resource management guidelines at oracle.com](https://www.oracle.com/technetwork/articles/java/trywithresources-401775.html) (external link).",
+         "RecommendationCategory":"ResourceLeaks"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/store/controller/store/facade/StoreFacadeImpl.java",
+         "RecommendationId":"8bb217118b5fd54e42a5bbd6582eff66da75e3289edf52e65bcd32129c28696c",
+         "StartLine":575,
+         "EndLine":575,
+         "Description":"**Problem**: While wrapping the caught exception into a custom one, information about the caught exception is being lost, including information about the stack trace of the exception.\n\n**Fix**: If the caught exception object does not contain sensitive information, consider passing it as the \"rootCause\" or inner exception parameter to the constructor of the new exception before throwing the new exception. (Note that not all exception constructors support inner exceptions. Use a wrapper exception that supports inner exceptions.) \n[Learn more](https://www.ibm.com/support/pages/best-practice-catching-and-re-throwing-java-exceptions)",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/populator/catalog/PersistableProductPopulator.java",
+         "RecommendationId":"979a782a8f6d2f2c028136a0f187559afc6cf59ae15f3d1209d126b52f72b3ff",
+         "StartLine":79,
+         "EndLine":79,
+         "Description":"The cyclomatic complexity of this method is 48. By comparison, 99% of the methods in the CodeGuru reference dataset have a lower cyclomatic complexity. This indicates the method has a high number of decisions and it can make the logic difficult to understand and test. We recommend that you simplify this method or break it into multiple methods.",
+         "RecommendationCategory":"CodeMaintenanceIssues"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/admin/controller/orders/OrderControler.java",
+         "RecommendationId":"9811cf0c662d82cae5b31a48293d69326580012dccd245b2737bd52b22780be3",
+         "StartLine":305,
+         "EndLine":305,
+         "Description":"**Problem**: An equality operator (== or !=) is used to compare strings, which matches strings based on address.\n\n**Fix**: Do content comparison using the equals() method to compare the values of the strings.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/admin/controller/orders/OrderControler.java",
+         "RecommendationId":"9bc1d63990ecb61a4b022fc9c373cbe4c07c7316fb1b7311482dcaedaa30d03b",
+         "StartLine":192,
+         "EndLine":192,
+         "Description":"**Problem**: An equality operator (== or !=) is used to compare strings, which matches strings based on address.\n\n**Fix**: Do content comparison using the equals() method to compare the values of the strings.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/utils/DateUtil.java",
+         "RecommendationId":"9c96c07b2d49b4e9493d186868b08358330b488496cf7da6435b312365a413c0",
+         "StartLine":91,
+         "EndLine":91,
+         "Description":"The SimpleDateFormat object was created without setting the time zone. Make sure that you want to use the default time zone or use letter z, Z or X in the pattern. Otherwise, if you do not call setTimeZone() on the created SimpleDateFormat object, you might get an unexpected date and time when using the object.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/store/api/v1/content/ContentApi.java",
+         "RecommendationId":"a019b8bcac2b72936d9cdcd0c677e664b9784c850594934cfab9420fd4843856",
+         "StartLine":424,
+         "EndLine":424,
+         "Description":"**Problem**: While wrapping the caught exception into a custom one, information about the caught exception is being lost, including information about the stack trace of the exception.\n\n**Fix**: If the caught exception object does not contain sensitive information, consider passing it as the \"rootCause\" or inner exception parameter to the constructor of the new exception before throwing the new exception. (Note that not all exception constructors support inner exceptions. Use a wrapper exception that supports inner exceptions.) \n[Learn more](https://www.ibm.com/support/pages/best-practice-catching-and-re-throwing-java-exceptions)",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/store/facade/user/UserFacadeImpl.java",
+         "RecommendationId":"a1854143fb9642b708c7367b71f5aebf9a7f6f85c05443de4b37b65d0e481345",
+         "StartLine":698,
+         "EndLine":698,
+         "Description":"**Problem**: While wrapping the caught exception into a custom one, information about the caught exception is being lost, including information about the stack trace of the exception.\n\n**Fix**: If the caught exception object does not contain sensitive information, consider passing it as the \"rootCause\" or inner exception parameter to the constructor of the new exception before throwing the new exception. (Note that not all exception constructors support inner exceptions. Use a wrapper exception that supports inner exceptions.) \n[Learn more](https://www.ibm.com/support/pages/best-practice-catching-and-re-throwing-java-exceptions)",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/store/controller/store/facade/StoreFacadeImpl.java",
+         "RecommendationId":"a3f7722de359c73aaaf3e07a84716538fbe3878a78e8044965d6eb88c46b45fa",
+         "StartLine":149,
+         "EndLine":149,
+         "Description":"**Problem**: While wrapping the caught exception into a custom one, information about the caught exception is being lost, including information about the stack trace of the exception.\n\n**Fix**: If the caught exception object does not contain sensitive information, consider passing it as the \"rootCause\" or inner exception parameter to the constructor of the new exception before throwing the new exception. (Note that not all exception constructors support inner exceptions. Use a wrapper exception that supports inner exceptions.) \n[Learn more](https://www.ibm.com/support/pages/best-practice-catching-and-re-throwing-java-exceptions)",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/controller/ReferenceController.java",
+         "RecommendationId":"a42428c8b0dea0199d1288259266016192dee0d68f64cb041d4879279e21f4dc",
+         "StartLine":147,
+         "EndLine":147,
+         "Description":"escapeJava(), escapeHtml3(), escapeHtml4(), escapeXml(), escapeXml10(), and escapeXml11() have been deprecated in org.apache.commons.lang.StringEscapeUtils and org.apache.commons.lang3.StringEscapeUtils and do not cover the entire range of characters that have to be encoded. OWASP Java Encoder library should be used instead.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/populator/shoppingCart/ReadableShoppingCartPopulator.java",
+         "RecommendationId":"a4fcc37ab78637350303679609f386d4d8a5a7e1c66df4565dc25fe5871cba75",
+         "StartLine":57,
+         "EndLine":57,
+         "Description":"The cyclomatic complexity of this method is 26. By comparison, 99% of the methods in the CodeGuru reference dataset have a lower cyclomatic complexity. This indicates the method has a high number of decisions and it can make the logic difficult to understand and test.\n\nWe recommend that you simplify this method or break it into multiple methods. For example, consider extracting the code block on lines 74-87 into a separate method.",
+         "RecommendationCategory":"CodeMaintenanceIssues"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/modules/integration/payment/impl/BraintreePayment.java",
+         "RecommendationId":"a5604af3c56d5d291dbe6059fca70820862cb37460a0063189b0d943aeff114a",
+         "StartLine":257,
+         "EndLine":270,
+         "Description":"Similar code fragments were detected in the same file at the following lines: 257:270, 431:444.  \nRefactoring can help improve code maintainability. Consider reducing duplicate code by extracting it into a separate method. You can then replace duplicated code with calls to this new method.",
+         "RecommendationCategory":"DuplicateCode"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/utils/ajax/AjaxPageableResponse.java",
+         "RecommendationId":"aa984f77db08c4c968685483057e8a340c8560eb67f8afa5fc1e72d7ebe3cc8d",
+         "StartLine":59,
+         "EndLine":59,
+         "Description":"**Problem**: Iterating over [map.keySet()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#keySet--) and calling [map.get(Key)](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#get-java.lang.Object-) to get the values within the loop is inefficient. \n**Fix**: Iterate over [map.entrySet()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#entrySet--) and access the values using [entry.getValue()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.Entry.html#getValue--) to avoid potential performance penalty due to lookup.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/utils/SanitizeUtils.java",
+         "RecommendationId":"abe1e7fb8da96a68cffc8f268251b8dab5d9c68245660e7f8a63a498129d215e",
+         "StartLine":109,
+         "EndLine":109,
+         "Description":"escapeJava(), escapeHtml3(), escapeHtml4(), escapeXml(), escapeXml10(), and escapeXml11() have been deprecated in org.apache.commons.lang.StringEscapeUtils and org.apache.commons.lang3.StringEscapeUtils and do not cover the entire range of characters that have to be encoded. OWASP Java Encoder library should be used instead.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/store/controller/order/facade/OrderFacadeImpl.java",
+         "RecommendationId":"abf0fa5aed1c2a5c98c359f3e30251154d51d80be8b8d1efd2c8858ed3629efa",
+         "StartLine":703,
+         "EndLine":703,
+         "Description":"The cyclomatic complexity of this method is 35. By comparison, 99% of the methods in the CodeGuru reference dataset have a lower cyclomatic complexity. This indicates the method has a high number of decisions and it can make the logic difficult to understand and test. We recommend that you simplify this method or break it into multiple methods.",
+         "RecommendationCategory":"CodeMaintenanceIssues"
+      },
+      {
+         "FilePath":"sm-core-model/src/main/java/com/salesmanager/core/model/merchant/MerchantStore.java",
+         "RecommendationId":"ad396b752f291061c3754a828d699a5b94a0b08f93b3056f939ca13e4697004a",
+         "StartLine":66,
+         "EndLine":70,
+         "Description":"javax.persistence.Id annotation should not be attached to 32-bit data. Using 32-bit data types is risky because loading from the database will cause an exception when the table passes 2^32 entries. A mix of 32-bit and 64-bit values can lead to integer wrap-arounds. Consider monitoring the growth of the relevant tables to estimate when integer overflow would happen. Consider changing the field annotated with @Id from integer to long. Also consider adding an alarm that notifies you when the number of rows increases by an order of magnitude.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/modules/cms/product/aws/S3ProductContentFileManager.java",
+         "RecommendationId":"ae7248289c698c1244efa2a409a33d4d3c6e1d1d2e05884dec321f30abc8e8dc",
+         "StartLine":92,
+         "EndLine":92,
+         "Description":"This code might not produce accurate results if the operation returns paginated results instead of all results. Consider adding another call to check for additional results.",
+         "RecommendationCategory":"AWSBestPractices"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/services/shipping/ShippingServiceImpl.java",
+         "RecommendationId":"b0cadcffbb4186bd6c589bc6c530ea536c577b8d2b3027814a0213c47739cdf6",
+         "StartLine":249,
+         "EndLine":249,
+         "Description":"**Problem**: An exception is caught and re-thrown within the catch clause without any other operations being performed on the exception, making the catch clause unnecessary.\n\n**Fix**: Perform additional operations on the exception that has been caught. You can wrap a standard exception into a custom exception to add additional information or special handling. When you do that, make sure to set the original exception as the cause. Otherwise, you will lose the stack trace and message of the original exception, which will make it difficult to analyze the event that caused the exception.  \n[Learn more](https://www.ibm.com/support/pages/best-practice-catching-and-re-throwing-java-exceptions)",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/populator/customer/CustomerPopulator.java",
+         "RecommendationId":"b20c250145b81546903aaa171c4625732146124a33660b84577ea8d664480086",
+         "StartLine":57,
+         "EndLine":57,
+         "Description":"The cyclomatic complexity of this method is 46. By comparison, 99% of the methods in the CodeGuru reference dataset have a lower cyclomatic complexity. This indicates the method has a high number of decisions and it can make the logic difficult to understand and test. We recommend that you simplify this method or break it into multiple methods.",
+         "RecommendationCategory":"CodeMaintenanceIssues"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/modules/integration/shipping/impl/CustomWeightBasedShippingQuote.java",
+         "RecommendationId":"b37e6ce0422ca9da1c7a8b69cc07a4960abc22869fd83c2291cb6aba12a3d3e5",
+         "StartLine":129,
+         "EndLine":129,
+         "Description":"We found 3 occurrences in your code of a similar method that calls ShippingOption.setShippingModuleCode. Based on those occurrences, we expect it to be called before the selected line. We recommend you check if this is intentional. The following is an example in your code of when this method is called: shopizer/sm-core/src/main/java/com/salesmanager/core/business/modules/integration/shipping/impl/CustomShippingQuoteRules.java#L161",
+         "RecommendationCategory":"CodeInconsistencies"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/repositories/catalog/product/ProductRepositoryImpl.java",
+         "RecommendationId":"b41ca1e62fb1933ef7ef1bae8a2cbded27606b3460c22e1f302f48f2ac974392",
+         "StartLine":607,
+         "EndLine":607,
+         "Description":"The cyclomatic complexity of this method is 64. By comparison, 99% of the methods in the CodeGuru reference dataset have a lower cyclomatic complexity. This indicates the method has a high number of decisions and it can make the logic difficult to understand and test.\n\nWe recommend that you simplify this method or break it into multiple methods. For example, consider extracting the code block on lines 655-681 into a separate method.",
+         "RecommendationCategory":"CodeMaintenanceIssues"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/store/facade/product/ProductFacadeImpl.java",
+         "RecommendationId":"b42b63bf9c3d4d635857e1d30e108623d82de97c944606ce977c3e7643f33cca",
+         "StartLine":499,
+         "EndLine":499,
+         "Description":"**Problem**: While wrapping the caught exception into a custom one, information about the caught exception is being lost, including information about the stack trace of the exception.\n\n**Fix**: If the caught exception object does not contain sensitive information, consider passing it as the \"rootCause\" or inner exception parameter to the constructor of the new exception before throwing the new exception. (Note that not all exception constructors support inner exceptions. Use a wrapper exception that supports inner exceptions.) \n[Learn more](https://www.ibm.com/support/pages/best-practice-catching-and-re-throwing-java-exceptions)",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/store/controller/customer/facade/CustomerFacadeImpl.java",
+         "RecommendationId":"b706b485ebebe0135387a358c191aad61e8a9c38cf46ea9ebce80d3b3b79ee16",
+         "StartLine":103,
+         "EndLine":103,
+         "Description":"This class references 96 other classes. By comparison, 99% of the classes in the CodeGuru reference dataset reference fewer. This indicates that this class is highly coupled with other classes. A class that is highly coupled with other classes is difficult to understand and its behavior might change unexpectedly when one of its referenced classes is updated. High coupling could also increase the integration test complexity, maintenance cost and technical debt. We recommend that you simplify this class or break it into multiple classes.",
+         "RecommendationCategory":"CodeMaintenanceIssues"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/services/order/OrderServiceImpl.java",
+         "RecommendationId":"b8849a6cf3bab31221d4601d83d7504b3e56083a0fbfe4f3a4aea1745054ff51",
+         "StartLine":649,
+         "EndLine":649,
+         "Description":"**Problem**: Iterating over [map.keySet()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#keySet--) and calling [map.get(Key)](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#get-java.lang.Object-) to get the values within the loop is inefficient. \n**Fix**: Iterate over [map.entrySet()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#entrySet--) and access the values using [entry.getValue()](https://docs.oracle.com/javase/8/docs/api/java/util/Map.Entry.html#getValue--) to avoid potential performance penalty due to lookup.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/store/controller/store/facade/StoreFacadeImpl.java",
+         "RecommendationId":"b8fab6591373533ede2dc38ebbbd3250912b15e8a26b41af63ebbe4a433148fd",
+         "StartLine":164,
+         "EndLine":164,
+         "Description":"**Problem**: While wrapping the caught exception into a custom one, information about the caught exception is being lost, including information about the stack trace of the exception.\n\n**Fix**: If the caught exception object does not contain sensitive information, consider passing it as the \"rootCause\" or inner exception parameter to the constructor of the new exception before throwing the new exception. (Note that not all exception constructors support inner exceptions. Use a wrapper exception that supports inner exceptions.) \n[Learn more](https://www.ibm.com/support/pages/best-practice-catching-and-re-throwing-java-exceptions)",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-shop/src/main/java/com/salesmanager/shop/populator/shoppingCart/ShoppingCartDataPopulator.java",
+         "RecommendationId":"b904143873ce7a41f6b462a7389c77abc77984e38cb40e687f26aa614a72d17f",
+         "StartLine":89,
+         "EndLine":89,
+         "Description":"The cyclomatic complexity of this method is 25. By comparison, 99% of the methods in the CodeGuru reference dataset have a lower cyclomatic complexity. This indicates the method has a high number of decisions and it can make the logic difficult to understand and test. We recommend that you simplify this method or break it into multiple methods.",
+         "RecommendationCategory":"CodeMaintenanceIssues"
+      },
+      {
+         "FilePath":"sm-core-model/src/main/java/com/salesmanager/core/model/user/Group.java",
+         "RecommendationId":"b9ab1b9827faae5cc3f4b9fe1f7f563621aecfd3fffa14010f7970aea7bf0be3",
+         "StartLine":41,
+         "EndLine":45,
+         "Description":"javax.persistence.Id annotation should not be attached to 32-bit data. Using 32-bit data types is risky because loading from the database will cause an exception when the table passes 2^32 entries. A mix of 32-bit and 64-bit values can lead to integer wrap-arounds. Consider monitoring the growth of the relevant tables to estimate when integer overflow would happen. Consider changing the field annotated with @Id from integer to long. Also consider adding an alarm that notifies you when the number of rows increases by an order of magnitude.",
+         "RecommendationCategory":"JavaBestPractices"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/modules/cms/content/aws/S3StaticContentAssetsManagerImpl.java",
+         "RecommendationId":"bb1e1713d875f87320d12a4a782838047719930567adfb4ee79aa8d74b8e48e5",
+         "StartLine":167,
+         "EndLine":167,
+         "Description":"**Problem**: When objects are uploaded to Amazon S3 by using streams (either through an AmazonS3 client or TransferManager), you might encounter network connectivity or timeout issues.\n\n**Fix**: The most reliable way to avoid a ResetException is to provide data by using a File or FileInputStream, which the AWS SDK for Java can handle without being constrained by mark and reset limits. If the input stream isn't a FileInputStream but does support mark and reset, you can set the mark limit by using the [setReadLimit](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/RequestClientOptions.html#setReadLimit-int-) method of [RequestClientOptions.](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/RequestClientOptions.html) Its default value is 128 KB. Setting the read limit value to one byte greater than the size of stream will reliably avoid a ResetException.\n\n[Learn more](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/best-practices.html)",
+         "RecommendationCategory":"AWSBestPractices"
+      },
+      {
+         "FilePath":"sm-core/src/main/java/com/salesmanager/core/business/services/payments/PaymentServiceImpl.java",
+         "RecommendationId":"bfe10b6824717879c6c5a7d0818d128e6228baa3f269fb8642475e4a2e0d139c",
+         "StartLine":221,
+         "EndLine":221,
+         "Description":"**Problem**: An exception is caught and re-thrown within the catch clause without any other operations being performed on the exception, making the catch clause unnecessary.\n\n**Fix**: Perform additional operations on the exception that has been caught. You can wrap a standard exception into a custom exception to add additional information or special handling. When you do that, make sure to set the original exception as the cause. Otherwise, you will lose the stack trace and message of the original exception, which will make it difficult to analyze the event that caused the exception.  \n[Learn more](https://www.ibm.com/support/pages/best-practice-catching-and-re-throwing-java-exceptions)",
+         "RecommendationCategory":"JavaBestPractices"
+      }
+   ],
+   "NextToken":"eyJ2ZXJzaW9uIjoxLCJjaXBoZXIiOiJBWUFEZUJnZ1BtcFV6Q04wVFh3SFN5Mnp0YXNBWHdBQkFCVmhkM010WTNKNWNIUnZMWEIxWW14cFl5MXJaWGtBUkVFeE0zQlZaazFKZVVFd1dWUktRblp2Y1ZsMlJFNHlWVkZMV2tWbU1HbG9kM1ZSZVRjd05HUjJORWRJWlVKMWJVbE9hRWhQVEdGWFVuVk5ibkY1VTNOa1VUMDlBQUVBQjJGM2N5MXJiWE1BUzJGeWJqcGhkM002YTIxek9uVnpMWGRsYzNRdE1qbzBNakkzTlRVM09UWXpNVGc2YTJWNUwySmhZalk0WkRZeUxUSm1ZMlV0TkRsak1TMWlNMkkzTFRjNU56WTJPRFl6WkRVeFpRQzRBUUlCQUhnT1VJdXVQQ0c1TTlvN2FUaytxWVlndVZ1RndUVGNNNURWSUIzWHN1aGJ6UUc3RU1xZGhoVmpBcEhyYjJWd25WMUpBQUFBZmpCOEJna3Foa2lHOXcwQkJ3YWdiekJ0QWdFQU1HZ0dDU3FHU0liM0RRRUhBVEFlQmdsZ2hrZ0JaUU1FQVM0d0VRUU05dFhFcDFWV3RNMi8zOXNKQWdFUWdEdlAwUWJVYkM5TnNSeFNGL3NwaVEwcWxLUFNkM1RqNnczdDBxK2dTUit6Nk0zQU1XRGMxMU5hNlVGNTNGMTJVMDZYNHNvWW9HajlDUFJmd2dJQUFBQUFEQUFBRUFBQUFBQUFBQUFBQUFBQUFBRHlQSVVCVkZvdkswY1hPdmpmYWdsQS8vLy8vd0FBQUFFQUFBQUFBQUFBQUFBQUFBRUFBQURCeklIcHRrR0xOZWZDQlVDNlFzelN0SjZWOSt1VzVhVGVzTWFDL0ZYdlpwM1hxNnVJT1JwNFNYMEVCR2ZraWhLLzRzQW5TeXFsM01TQnZIeFdwY3NPMEhRVG9wd2dFalVQS0duL1JVMmpiRHd1S3NCSnBRMENNNjRPb09lemZXRjNCbE1yT2UrbW52Z0V6byswcmZZWEoxK2F6WWVkSjdyaEFTM0VNWFR3V3BFZXRaa2hiUlRrRFJOTExpa0xBQkVlT0tXZ09qVUxoRzUwTVF4UVpsemJiM1dHaDVLTExvN0E2TmVoem1FOHIrZHg0emxzNVB0VkhlbE1CMjI0cHZBSXpmNE9EMTl4QzFPanZGMC9MSnNYcmtVQVp6QmxBakVBOXY0TjVUTTRhRGYzMS9TVHd4N2dXSEVKUkYzbGZYM2I5elZqa0U2cENidHZMRk8raUNncXBPb2xLdTh1U1pSTUFqQk9oZWJVZjBwWUd4b2ZzWWptT1FUV2ZoOGFUclpMdlE5a2ZrYWhxQ1JGNm5lUE8wRkRzS2pHSy9Rb0I3UHNWSmtcdTAwM2QifQ=="
+}
