@@ -30,7 +30,7 @@ public class InitializationLoader {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(InitializationLoader.class);
 
-	@Value("${db.init.data:false}")
+	@Value("${db.init.data:true}")
     private boolean initDefaultData;
 
 
