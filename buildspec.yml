@@ -30,6 +30,7 @@ phases:
       - CommitID=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - echo ${CommitID}
       - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
+      - cd sm-shop
       - echo '{"access":"'$accesskeyid'", "key":"'$secretkeyid'"}' > credentials.json
       - cat credentials.json
       - ls
