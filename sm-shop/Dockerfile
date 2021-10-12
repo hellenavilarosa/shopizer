@@ -4,11 +4,18 @@ COPY ./target/ROOT.war /usr/local/tomcat/webapps/ROOT.war
 ADD ./SALESMANAGER.h2.db /usr/local/tomcat/
 COPY ./files/ /usr/local/tomcat/files/
 COPY ./codeguru-profiler-java-agent-standalone-1.2.1.jar /usr/local/
+COPY ./credentials.json /usr/src/project
 WORKDIR /usr/src/project
 
 #FROM tomcat:9.0.10-jre8
 
 RUN mkdir -p /usr/local/tomcat/files
+
+RUN yum install jq
+RUN AWS_ACCESS_KEY_ID="$(cat /usr/src/project/credentials.json | jq -r .access)"
+RUN AWS_SECRET_ACCESS_KEY="$(cat /usr/src/project/credentials.json | jq -r .key)"
+
+
 
 #COPY /usr/src/project/ROOT.war /usr/local/tomcat/webapps/ROOT.war
 #COPY  /usr/src/project/SALESMANAGER.h2.db /usr/local/tomcat/
