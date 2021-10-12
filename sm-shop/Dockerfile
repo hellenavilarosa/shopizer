@@ -11,7 +11,7 @@ WORKDIR /usr/src/project
 
 RUN mkdir -p /usr/local/tomcat/files
 
-
+RUN apt-get install jq
 RUN AWS_ACCESS_KEY_ID="$(cat /usr/src/project/credentials.json | jq -r .access)"
 RUN AWS_SECRET_ACCESS_KEY="$(cat /usr/src/project/credentials.json | jq -r .key)"
 
