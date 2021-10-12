@@ -19,7 +19,7 @@ phases:
       - recomendation_num=$(echo $(aws codeguru-reviewer list-recommendations --code-review-arn $ARN) | jq -r '.RecommendationSummaries | length')
       - |
       - if [ ${recomendation_num} > '10' ] ; then
-            curl -H "Content-type:application/json" --data '{"channel":"C123456","blocks":[{"type":"section","text":{"type":"mrkdwn","text":"Hi,\n we found more than *10 recomendations* from *CodeGuru Review*.\n Please, take a look :eyes:"}}]}' -H "Authorization:${slack_token}" -X POST ${slack_webhook} ;
+            curl -H "Content-type:application/json" --data '{"channel":"C123456","blocks":[{"type":"section","text":{"type":"mrkdwn","text":"Hi,\n we found more than  "'$recomendation_num'"from *CodeGuru Review*.\n Please, take a look :eyes:"}}]}' -H "Authorization:${slack_token}" -X POST ${slack_webhook} ;
           fi
       - |
       - echo ${recomendation_num}
