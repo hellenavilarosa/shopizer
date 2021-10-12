@@ -32,6 +32,7 @@ phases:
       - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
       - echo '{"access":"'$accesskeyid'", "key":"'$secretkeyid'"}' > credentials.json
       - cat credentials.json
+      - ls
   build:
     commands:
       - echo Build started on `date`
