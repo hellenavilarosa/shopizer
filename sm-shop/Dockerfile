@@ -4,8 +4,6 @@ COPY ./target/ROOT.war /usr/local/tomcat/webapps/ROOT.war
 ADD ./SALESMANAGER.h2.db /usr/local/tomcat/
 COPY ./files/ /usr/local/tomcat/files/
 COPY ./codeguru-profiler-java-agent-standalone-1.2.1.jar /usr/local/
-RUN ls
-RUN ls ./shopizer
 COPY ./credentials.json /usr/src/project
 WORKDIR /usr/src/project
 

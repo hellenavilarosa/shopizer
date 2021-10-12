@@ -12,7 +12,7 @@ phases:
       # - wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
       # - sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
       # - yum install -y apache-maven
-      # - yum install jq -y 
+      # - yum install jq -y
       - mvn --version
       - mvn clean install
       #- aws codeguru-reviewer wait code-review-completed --code-review-arn $ARN
@@ -33,6 +33,7 @@ phases:
       - echo '{"access":"'$accesskeyid'", "key":"'$secretkeyid'"}' > credentials.json
       - cat credentials.json
       - ls
+      - pwd
   build:
     commands:
       - echo Build started on `date`
