@@ -39,7 +39,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - cd sm-shop
+      # - cd sm-shop
       - dockerd &> /dev/null &
       - docker login --username AWS -p $(aws ecr get-login-password --region us-west-2) 545553504856.dkr.ecr.us-west-2.amazonaws.com
       - docker build -t ${REPOSITORY_URI}:${CommitID} .
