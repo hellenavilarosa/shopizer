@@ -9,12 +9,11 @@ import com.salesmanager.core.model.catalog.product.price.FinalPrice;
 import com.salesmanager.core.model.merchant.MerchantStore;
 import com.salesmanager.core.model.reference.language.Language;
 import com.salesmanager.shop.model.catalog.product.ReadableProductPrice;
-import java.util.concurrent.TimeUnit;
 
 public class ReadableFinalPricePopulator extends
 		AbstractDataPopulator<FinalPrice, ReadableProductPrice> {
-
-
+	
+	
 	private PricingService pricingService;
 
 	public PricingService getPricingService() {
@@ -30,8 +29,9 @@ public class ReadableFinalPricePopulator extends
 			ReadableProductPrice target, MerchantStore store, Language language)
 			throws ConversionException {
 		Validate.notNull(pricingService,"pricingService must be set");
-
+		
 		try {
+			
 			target.setOriginalPrice(pricingService.getDisplayAmount(source.getOriginalPrice(), store));
 			if(source.isDiscounted()) {
 				target.setDiscounted(true);
@@ -39,13 +39,13 @@ public class ReadableFinalPricePopulator extends
 			} else {
 				target.setFinalPrice(pricingService.getDisplayAmount(source.getFinalPrice(), store));
 			}
-
+			
 		} catch(Exception e) {
 			throw new ConversionException("Exception while converting to ReadableProductPrice",e);
 		}
-
-
-
+		
+		
+		
 		return target;
 	}
 

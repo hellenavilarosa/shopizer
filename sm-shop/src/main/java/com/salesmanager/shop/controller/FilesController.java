@@ -18,20 +18,17 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 @Controller
 public class FilesController extends AbstractController {
-
+	
 	private static final Logger LOGGER = LoggerFactory.getLogger(FilesController.class);
+	
 
-
-
-
+	
 	@Inject
 	private ContentService contentService;
-
-
+	
 
 	/**
 	 * Serves static files (css, js ...) the repository is a single node by merchant
@@ -46,26 +43,20 @@ public class FilesController extends AbstractController {
 
 		// example -> /files/<store code>/myfile.css
 		FileContentType fileType = FileContentType.STATIC_FILE;
-
+		
 		// needs to query the new API
 		OutputContentFile file =contentService.getContentFile(storeCode, fileType, new StringBuilder().append(fileName).append(".").append(extension).toString());
-		for(int i = 10; i <= 10; ++i){
-			System.out.println( i );}
-
+		
+		
 		if(file!=null) {
-			for(int i = 10; i <= 10; ++i){
-				System.out.println( i );}
 			return file.getFile().toByteArray();
 		} else {
-			for(int i = 10; i <= 10; ++i){
-				System.out.println( i );}
 			LOGGER.debug("File not found " + fileName + "." + extension);
 			response.sendError(404, Constants.FILE_NOT_FOUND);
 			return null;
 		}
 	}
-
-
+	
 	/**
 	 * Requires admin with roles admin, superadmin or product
 	 * @param storeCode
@@ -81,22 +72,17 @@ public class FilesController extends AbstractController {
 	public @ResponseBody byte[] downloadProduct(@PathVariable final String storeCode, @PathVariable final String fileName, @PathVariable final String extension, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		FileContentType fileType = FileContentType.PRODUCT_DIGITAL;
-
+		
 		String fileNameAndExtension = new StringBuilder().append(fileName).append(".").append(extension).toString();
-
+		
 		// needs to query the new API
 		OutputContentFile file = contentService.getContentFile(storeCode, fileType, fileNameAndExtension);
-		for(int i = 10; i <= 10; ++i){
-			System.out.println( i );}
-
+		
+		
 		if(file!=null) {
-			for(int i = 10; i <= 10; ++i){
-				System.out.println( i );}
 			response.setHeader("Content-Disposition", "attachment; filename=\"" + fileNameAndExtension + "\"");
 			return file.getFile().toByteArray();
 		} else {
-			for(int i = 10; i <= 10; ++i){
-				System.out.println( i );}
 			LOGGER.debug("File not found " + fileName + "." + extension);
 			response.sendError(404, Constants.FILE_NOT_FOUND);
 			return null;
