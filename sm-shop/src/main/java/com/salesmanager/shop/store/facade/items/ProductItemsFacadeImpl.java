@@ -30,90 +30,102 @@ import com.salesmanager.shop.store.api.exception.ResourceNotFoundException;
 import com.salesmanager.shop.store.api.exception.ServiceRuntimeException;
 import com.salesmanager.shop.store.controller.items.facade.ProductItemsFacade;
 import com.salesmanager.shop.utils.ImageFilePath;
+import java.util.Map;
+
+
+class BadKey {
+	// no hashCode or equals();
+	 public final String key;
+	 public BadKey(String key) { this.key = key; }
+}
 
 @Component
 public class ProductItemsFacadeImpl implements ProductItemsFacade {
-	
-	
+
+
 	@Inject
 	ProductService productService;
-	
+
 	@Inject
 	PricingService pricingService;
-	
+
 	@Inject
 	@Qualifier("img")
 	private ImageFilePath imageUtils;
-	
+
 	@Inject
 	private ProductRelationshipService productRelationshipService;
 
 	@Override
 	public ReadableProductList listItemsByManufacturer(MerchantStore store,
 			Language language, Long manufacturerId, int startCount, int maxCount) throws Exception {
-		
-		
+
+		Map map = System.getProperties();
+		map.put(new BadKey("key"), "value"); // Memory leak even if your threads die.
+
+
+
 		ProductCriteria productCriteria = new ProductCriteria();
 		productCriteria.setMaxCount(maxCount);
 		productCriteria.setStartIndex(startCount);
-		
+
 
 		productCriteria.setManufacturerId(manufacturerId);
 		com.salesmanager.core.model.catalog.product.ProductList products = productService.listByStore(store, language, productCriteria);
 
-		
+
 		ReadableProductPopulator populator = new ReadableProductPopulator();
 		populator.setPricingService(pricingService);
 		populator.setimageUtils(imageUtils);
-		
-		
+
+
 		ReadableProductList productList = new ReadableProductList();
 		for(Product product : products.getProducts()) {
 
 			//create new proxy product
 			ReadableProduct readProduct = populator.populate(product, new ReadableProduct(), store, language);
 			productList.getProducts().add(readProduct);
-			
+
 		}
-		
+
 		productList.setTotalPages(Math.toIntExact(products.getTotalCount()));
-		
-		
+
+
 		return productList;
 	}
-	
+
 	@Override
 	public ReadableProductList listItemsByIds(MerchantStore store, Language language, List<Long> ids, int startCount,
 			int maxCount) throws Exception {
-		
+
 		if(CollectionUtils.isEmpty(ids)) {
 			return new ReadableProductList();
 		}
-		
-		
+
+
 		ProductCriteria productCriteria = new ProductCriteria();
 		productCriteria.setMaxCount(maxCount);
 		productCriteria.setStartIndex(startCount);
 		productCriteria.setProductIds(ids);
-		
+
 
 		com.salesmanager.core.model.catalog.product.ProductList products = productService.listByStore(store, language, productCriteria);
 
-		
+
 		ReadableProductPopulator populator = new ReadableProductPopulator();
 		populator.setPricingService(pricingService);
 		populator.setimageUtils(imageUtils);
-		
-		
+
+
 		ReadableProductList productList = new ReadableProductList();
 		for(Product product : products.getProducts()) {
 
 			//create new proxy product
 			ReadableProduct readProduct = populator.populate(product, new ReadableProduct(), store, language);
 			productList.getProducts().add(readProduct);
-			
+
 		}
-		
+
 		productList.setNumber(Math.toIntExact(products.getTotalCount()));
 		productList.setRecordsTotal(new Long(products.getTotalCount()));
 
@@ -133,24 +145,24 @@ public class ProductItemsFacadeImpl implements ProductItemsFacade {
 				Product product = relationship.getRelatedProduct();
 				ids.add(product.getId());
 			}
-			
+
 			ReadableProductList list = listItemsByIds(store, language, ids, 0, 0);
 			List<ReadableProduct> prds = list.getProducts().stream().sorted(Comparator.comparing(ReadableProduct::getSortOrder)).collect(Collectors.toList());
 			list.setProducts(prds);
 			list.setTotalPages(1);//no paging
 			return list;
 		}
-		
+
 		return null;
 	}
 
 	@Override
 	public ReadableProductList addItemToGroup(Product product, String group, MerchantStore store, Language language) {
-		
+
 		Validate.notNull(product,"Product must not be null");
 		Validate.notNull(group,"group must not be null");
-		
-		
+
+
 		//check if product is already in group
 		List<ProductRelationship> existList = null;
 		try {
@@ -160,12 +172,12 @@ public class ProductItemsFacadeImpl implements ProductItemsFacade {
 		} catch (ServiceException e) {
 			throw new ServiceRuntimeException("ExceptionWhile getting product group [" + group + "]", e);
 		}
-		
+
 		if(existList.size()>0) {
 			throw new OperationNotAllowedException("Product with id [" + product.getId() + "] is already in the group");
 		}
-		
-		
+
+
 		ProductRelationship relationship = new ProductRelationship();
 		relationship.setActive(true);
 		relationship.setCode(group);
@@ -178,16 +190,16 @@ public class ProductItemsFacadeImpl implements ProductItemsFacade {
 		} catch (Exception e) {
 			throw new ServiceRuntimeException("ExceptionWhile getting product group [" + group + "]", e);
 		}
-		
-		
-		
-		
+
+
+
+
 	}
 
 	@Override
 	public ReadableProductList removeItemFromGroup(Product product, String group, MerchantStore store,
 			Language language) throws Exception {
-		
+
 		ProductRelationship relationship = null;
 		List<ProductRelationship> relationships = productRelationshipService.getByType(store, product, group);
 
@@ -202,16 +214,16 @@ public class ProductItemsFacadeImpl implements ProductItemsFacade {
 
 	@Override
 	public void deleteGroup(String group, MerchantStore store) {
-		
+
 		Validate.notNull(group, "Group cannot be null");
 		Validate.notNull(store, "MerchantStore cannot be null");
-		
+
 		try {
 			productRelationshipService.deleteGroup(store, group);
 		} catch (ServiceException e) {
 			throw new ServiceRuntimeException("Cannor delete product group",e);
 		}
-		
+
 	}
 
 	@Override
@@ -234,39 +246,39 @@ public class ProductItemsFacadeImpl implements ProductItemsFacade {
 			if(CollectionUtils.isEmpty(items)) {
 				throw new ResourceNotFoundException("ProductGroup [" + code + "] not found");
 			}
-			
+
 			if(group.isActive()) {
 				productRelationshipService.activateGroup(store, code);
 			} else {
 				productRelationshipService.deactivateGroup(store, code);
 			}
-			
+
 		} catch (ServiceException e) {
 			throw new ServiceRuntimeException("Exception while updating product [" + code + "]");
 		}
-		
+
 	}
 
 	@Override
 	public List<ProductGroup> listProductGroups(MerchantStore store, Language language) {
 		Validate.notNull(store,"MerchantStore cannot be null");
-		
+
 		List<ProductRelationship> relationships = productRelationshipService.getGroups(store);
-		
+
 		List<ProductGroup> groups = new ArrayList<ProductGroup>();
-		
+
 		for(ProductRelationship relationship : relationships) {
-			
+
 			if(!"FEATURED_ITEM".equals(relationship.getCode())) {//do not add featured items
 				ProductGroup g = new ProductGroup();
 				g.setActive(relationship.isActive());
 				g.setCode(relationship.getCode());
 				groups.add(g);
-			
+
 			}
-			
+
 		}
-		
+
 		return groups;
 	}
 

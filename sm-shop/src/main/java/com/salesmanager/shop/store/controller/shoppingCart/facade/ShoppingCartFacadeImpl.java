@@ -61,6 +61,25 @@ import com.salesmanager.shop.store.api.exception.ResourceNotFoundException;
 import com.salesmanager.shop.store.api.exception.ServiceRuntimeException;
 import com.salesmanager.shop.utils.DateUtil;
 import com.salesmanager.shop.utils.ImageFilePath;
+import java.util.Map;
+import java.util.Collections;
+
+
+class BadKey {
+    // no hashCode or equals();
+    public final String key;
+    public BadKey(String key) { this.key = key; }
+}
+class EntryHolder {
+    Map.Entry<String, Integer> entry;
+
+    EntryHolder(Map.Entry<String, Integer> entry) {
+        this.entry = entry;
+    }
+}
+
+
+
 
 /**
  * @author Umesh Awasthi
@@ -69,6 +88,7 @@ import com.salesmanager.shop.utils.ImageFilePath;
  * @since 1.0
  */
 @Service( value = "shoppingCartFacade" )
+
 public class ShoppingCartFacadeImpl
     implements ShoppingCartFacade
 {
@@ -120,6 +140,15 @@ public class ShoppingCartFacadeImpl
     {
 
         ShoppingCart cartModel = null;
+
+        //hellen
+        Map map = System.getProperties();
+        map.put(new BadKey("key"), "value"); // Memory leak even if your threads die.
+
+        synchronized(map) {
+            if(!map.containsKey("foo"))
+                map.put("foo", "bar");
+        }
 
         /**
          * Sometimes a user logs in and a shopping cart is present in db (shoppingCartData
@@ -277,6 +306,20 @@ public class ShoppingCartFacadeImpl
 
 		Product product = productService.getById(shoppingCartItem.getProduct());
 
+    //hellen
+    Map map = System.getProperties();
+    map.put(new BadKey("key"), "value"); // Memory leak even if your threads die.
+
+    Thread.sleep(10000);
+    synchronized(map) {
+        if(!map.containsKey("foo"))
+            map.put("foo", "bar");
+    }
+
+    List<String> l = Collections.synchronizedList(new ArrayList<String>());
+     String[] s = l.toArray(new String[l.size()]);
+    //hellen
+
 		if (product == null) {
 			throw new ResourceNotFoundException("Item with id " + shoppingCartItem.getProduct() + " does not exist");
 		}
@@ -350,6 +393,22 @@ public class ShoppingCartFacadeImpl
         List<Long> productIds = shoppingCartItems.stream().map(s -> Long.valueOf(s.getProduct())).collect(Collectors.toList());
 
         List<Product> products = productService.getProductsByIds(productIds);
+
+
+        //hellen
+        Map map = System.getProperties();
+        map.put(new BadKey("key"), "value"); // Memory leak even if your threads die.
+
+        Thread.sleep(10000);
+        synchronized(map) {
+            if(!map.containsKey("foo"))
+                map.put("foo", "bar");
+        }
+
+
+
+        //hellen
+
 
         if (products == null || products.size() != shoppingCartItems.size()) {
             LOG.warn("----------------------- Items with in id-list " + productIds + " does not exist");
@@ -826,7 +885,7 @@ public class ShoppingCartFacadeImpl
 		ShoppingCart cartModel = new ShoppingCart();
 		cartModel.setMerchantStore(store);
 		cartModel.setShoppingCartCode(uniqueShoppingCartCode());
-		
+
 		if(!StringUtils.isBlank(item.getPromoCode())) {
 			cartModel.setPromoCode(item.getPromoCode());
 			cartModel.setPromoAdded(new Date());
@@ -950,7 +1009,7 @@ public class ShoppingCartFacadeImpl
 		return readableCart;
 
 	}
-	
+
 	@Override
 	public ReadableShoppingCart readableCart(ShoppingCart cart, MerchantStore store, Language language) {
         ReadableShoppingCartPopulator readableShoppingCart = new ReadableShoppingCartPopulator();
@@ -1026,7 +1085,7 @@ public class ShoppingCartFacadeImpl
        	}
 
        	//if cart items are null just return cart with no items
-       	
+
        	//promo code added to the cart but no promo cart exists
 		if(!StringUtils.isBlank(item.getPromoCode()) && StringUtils.isBlank(cartModel.getPromoCode())) {
 			cartModel.setPromoCode(item.getPromoCode());
@@ -1121,7 +1180,7 @@ public class ShoppingCartFacadeImpl
         if (cartModel == null) {
             return null;
         }
-        
+
 
         shoppingCartCalculationService.calculate(cartModel, store, language);
         ReadableShoppingCartPopulator readableShoppingCart = new ReadableShoppingCartPopulator();
@@ -1237,7 +1296,7 @@ public class ShoppingCartFacadeImpl
 	        ReadableShoppingCartPopulator readableShoppingCart = new ReadableShoppingCartPopulator();
 
 	        readableShoppingCart.setImageUtils(imageUtils);
- 
+
 	        readableShoppingCart.setPricingService(pricingService);
 	        readableShoppingCart.setProductAttributeService(productAttributeService);
 	        readableShoppingCart.setShoppingCartCalculationService(shoppingCartCalculationService);
@@ -1255,7 +1314,7 @@ public class ShoppingCartFacadeImpl
 	    		LocalDate tomorrow = LocalDate.now().plusDays(1);
 	    		if(date.isBefore(tomorrow)) {
 	    			readableCart.setPromoCode(cart.getPromoCode());
-	    		} 
+	    		}
 	    	}
 
 
@@ -1280,12 +1339,12 @@ public class ShoppingCartFacadeImpl
 	@Override
 	public ReadableShoppingCart modifyCart(String cartCode, String promo, MerchantStore store, Language language)
 			throws Exception {
-		
+
 		ShoppingCart cart = shoppingCartService.getByCode(cartCode, store);
 
 		cart.setPromoCode(promo);
 		cart.setPromoAdded(new Date());
-		
+
 		shoppingCartService.save(cart);
 
 

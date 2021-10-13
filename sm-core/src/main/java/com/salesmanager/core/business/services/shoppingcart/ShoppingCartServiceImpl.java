@@ -32,7 +32,23 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.Collections;
+import java.util.Map;
 
+// //hellen
+class BadKey {
+    // no hashCode or equals();
+    public final String key;
+    public BadKey(String key) { this.key = key; }
+}
+class EntryHolder {
+    Map.Entry<String, Integer> entry;
+
+    EntryHolder(Map.Entry<String, Integer> entry) {
+        this.entry = entry;
+    }
+}
+//hellen
 @Service("shoppingCartService")
 public class ShoppingCartServiceImpl extends SalesManagerEntityServiceImpl<Long, ShoppingCart>
 		implements ShoppingCartService {
@@ -73,15 +89,29 @@ public class ShoppingCartServiceImpl extends SalesManagerEntityServiceImpl<Long,
 
 		try {
 
+	    // hellen
+	    Map map = System.getProperties();
+	    map.put(new BadKey("key"), "value"); // Memory leak even if your threads die.
+
+	    Thread.sleep(10000);
+	    synchronized(map) {
+	        if(!map.containsKey("foo"))
+	            map.put("foo", "bar");
+	    }
+
+	    List<String> l = Collections.synchronizedList(new ArrayList<String>());
+	     String[] s = l.toArray(new String[l.size()]);
+	    // //hellen
+
 			List<ShoppingCart> shoppingCarts = shoppingCartRepository.findByCustomer(customer.getId());
-			
+
 			//elect valid shopping cart
 			List<ShoppingCart> validCart = shoppingCarts.stream()
 					.filter((cart) -> cart.getOrderId()==null)
 					.collect(Collectors.toList());
-			
+
 			ShoppingCart shoppingCart = null;
-			
+
 			if(!CollectionUtils.isEmpty(validCart)) {
 				shoppingCart = validCart.get(0);
 				getPopulatedShoppingCart(shoppingCart);
@@ -90,7 +120,7 @@ public class ShoppingCartServiceImpl extends SalesManagerEntityServiceImpl<Long,
 					shoppingCart = null;
 				}
 			}
-			
+
 			return shoppingCart;
 
 		} catch (Exception e) {
@@ -488,14 +518,14 @@ public class ShoppingCartServiceImpl extends SalesManagerEntityServiceImpl<Long,
 									.getById(shoppingCartAttributeItem.getId());
 							if (productAttribute != null
 									&& productAttribute.getProduct().getId().longValue() == product.getId().longValue()) {
-	
+
 								ShoppingCartAttributeItem attributeItem = new ShoppingCartAttributeItem(item,
 										productAttribute);
 								if (shoppingCartAttributeItem.getId() > 0) {
 									attributeItem.setId(shoppingCartAttributeItem.getId());
 								}
 								item.addAttributes(attributeItem);
-	
+
 							}
 						}
 					}
