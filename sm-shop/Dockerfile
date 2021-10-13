@@ -1,4 +1,7 @@
 FROM 545553504856.dkr.ecr.us-west-2.amazonaws.com/tomcat:latest
+
+RUN SPRING_PROFILES_ACTIVE=docker
+
 RUN rm -rf /usr/local/tomcat/webapps/*
 RUN mkdir -p /usr/local/tomcat/files
 COPY ./target/ROOT.war /usr/local/tomcat/webapps/ROOT.war
@@ -6,6 +9,8 @@ ADD ./SALESMANAGER.h2.db /usr/local/tomcat/
 COPY ./files/ /usr/local/tomcat/files/
 COPY ./codeguru-profiler-java-agent-standalone-1.2.1.jar /usr/local/
 COPY ./credentials.json /usr/src/project/
+
+RUN ls /usr/local/tomcat/files/
 WORKDIR /usr/src/project
 
 #FROM tomcat:9.0.10-jre8
