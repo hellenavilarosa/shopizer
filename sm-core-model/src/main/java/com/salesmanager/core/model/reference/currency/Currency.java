@@ -19,28 +19,28 @@ import com.salesmanager.core.model.generic.SalesManagerEntity;
 @Cacheable
 public class Currency extends SalesManagerEntity<Long, Currency> implements Serializable {
 	private static final long serialVersionUID = -999926410367685145L;
-	
+
 	@Id
 	@Column(name = "CURRENCY_ID")
 	@TableGenerator(name = "TABLE_GEN", table = "SM_SEQUENCER", pkColumnName = "SEQ_NAME", valueColumnName = "SEQ_COUNT", pkColumnValue = "CURRENCY_SEQ_NEXT_VAL")
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GEN")
 	private Long id;
-	
+
 	@Column(name = "CURRENCY_CURRENCY_CODE" ,nullable = false, unique = true)
 	private java.util.Currency currency;
-	
+
 	@Column(name = "CURRENCY_SUPPORTED")
 	private Boolean supported = true;
-	
+
 	@Column(name = "CURRENCY_CODE", unique = true)
 	private String code;
-	
+
 	@Column(name = "CURRENCY_NAME", unique = true)
 	private String name;
-	
+
 	public Currency() {
 	}
-	
+
 	@Override
 	public Long getId() {
 		return id;
@@ -67,14 +67,14 @@ public class Currency extends SalesManagerEntity<Long, Currency> implements Seri
 	public void setSupported(Boolean supported) {
 		this.supported = supported;
 	}
-	
+
 	public String getCode() {
-		if (currency.getCurrencyCode() != code) {
+		if (currency.getCurrencyCode().equals(code)) {
 			return currency.getCurrencyCode();
 		}
 		return code;
 	}
-	
+
 	public String getSymbol() {
 		return currency.getSymbol();
 	}

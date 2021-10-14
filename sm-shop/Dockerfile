@@ -13,7 +13,7 @@ COPY ./credentials.json /usr/src/project/
 RUN ls /usr/local/tomcat/files/
 WORKDIR /usr/src/project
 
-#FROM tomcat:9.0.10-jre8
+
 
 
 RUN apt-get update -y
@@ -21,12 +21,6 @@ RUN apt-get install jq -y
 RUN AWS_ACCESS_KEY_ID="$(cat /usr/src/project/credentials.json | jq -r .access)"
 RUN AWS_SECRET_ACCESS_KEY="$(cat /usr/src/project/credentials.json | jq -r .key)"
 
-
-
-#COPY /usr/src/project/ROOT.war /usr/local/tomcat/webapps/ROOT.war
-#COPY  /usr/src/project/SALESMANAGER.h2.db /usr/local/tomcat/
-#COPY  /usr/src/project/files/ /usr/local/tomcat/files/
-#COPY  /usr/src/project/codeguru-profiler-java-agent-standalone-1.2.1.jar /usr/local/
 
 RUN chmod -R o+x /usr/local/
 
